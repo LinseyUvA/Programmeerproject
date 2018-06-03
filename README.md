@@ -11,6 +11,6 @@ Op een kaart is voor verscheidene jaren te zien hoeveel reizigerskilometers er p
 Op het volgende scherm kan onderscheid worden gemaakt op de dag van verplaatsing en het tijdstip van verplaatsing. Nadat een keuze is gemaakt wordt aan de hand van een een scatterplot laten zien hoe de verhouding is tussen de hoeveelheid minuten en het aantal kilometers per provincie. Als er op een provincie uit de scatterplot wordt geklikt komt er ook hier meer informatie beschikbaar over de vervoerswijze binnen de desbetreffende provincie in de vorm van een staafdiagram.
 
 ### Functies
-Verscheidene jaartallen, dagen van vertrek en tijdstippen waaruit gekozen kan worden
+Verscheidene jaartallen, dagen en tijdstippen van vertrek waaruit gekozen kan worden.
 
 ## Vereisten
