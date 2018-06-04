@@ -33,7 +33,7 @@ Voor de visualisatie wordt gebruik gemaakt van alle provincies voor de jaren 201
 * bootstrap
 
 ### Gerelateerde visualisaties
-De Vervoerregio Amsterdam heeft de Regionale Thermometer Mobiliteit gepubliceerd. Met behulp van deze visualisatie wordt een beeld geschets van hoe de Amsterdammers zich verplaatsen. Hierbij maken zij onderandere gebruik van kaaten, puntdiagrammen en ringdiagrammen. Er zijn echter geen functie voor de gebruiker die ervoor zorgen dat de visualisatie interactief wordt. (file:///C:/Users/Linsey/Downloads/regionale-thermometer-mobiliteit-2017.pdf)
+De Vervoerregio Amsterdam heeft de Regionale Thermometer Mobiliteit gepubliceerd. Met behulp van deze visualisatie wordt een beeld geschets van hoe de Amsterdammers zich verplaatsen. Hierbij maken zij onderandere gebruik van kaaten, puntdiagrammen en ringdiagrammen. Er zijn echter geen functie voor de gebruiker die ervoor zorgen dat de visualisatie interactief wordt. (https://www.metropoolregioamsterdam.nl/artikel/20180601-vervoerregio-lanceert-regionale-thermometer-mobilite)
 
 Een andere vergelijkbare visualisatie is die van het Kennisinstituut voor Mobiliteitsbeleid. Zij laten met behulp van een gestapelde lijn grafiek zien hoe de verdeling is tussen de verschillende vervoerswijzen. Door over de grafiek te bewegen zijn precieze hoeveelheden te zien. (https://www.kimnet.nl/mobiliteitsbeeld#personenvervoer-article1)
 
