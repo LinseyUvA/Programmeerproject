@@ -16,8 +16,8 @@ Op de kaart is voor verscheidene jaren te zien hoeveel reizigerskilometers er pe
 
 ### Functies
 * Er kan uit verscheidene jaartallen gekozen worden waarna de kleur van de kaart zal worden geüpdatet.
-* Op de kaart kan geklikt worden, hiermee verschijnt de ringdiagram en de scatterplot.
-* In de scatterplot kan door middel van de checkbox onderscheid worden gemaakt in dagen of tijdstippen.
+* Op de kaart kan geklikt worden, hiermee verschijnt de ringdiagram en de scatterplot voor de aangeklikte provincie.
+* In de scatterplot kan door middel van de checkbox onderscheid worden gemaakt in dagen en/of tijdstippen.
 * In de ringdiagram kan op een aantal vervoerswijze geklikt worden wat zal zorgen voor een update van de scatterplot.
 
 ## Vereisten
@@ -33,12 +33,12 @@ Voor de visualisatie wordt gebruik gemaakt van alle provincies voor de jaren 201
 * bootstrap
 
 ### Gerelateerde visualisaties
-De Vervoerregio Amsterdam heeft de Regionale Thermometer Mobiliteit gepubliceerd. Met behulp van deze visualisatie wordt een beeld geschets van hoe de Amsterdammers zich verplaatsen. Hierbij maken zij onderandere gebruik van kaaten, puntdiagrammen en ringdiagrammen. Er zijn echter geen functie voor de gebruiker die ervoor zorgen dat de visualisatie interactief wordt. (https://www.metropoolregioamsterdam.nl/artikel/20180601-vervoerregio-lanceert-regionale-thermometer-mobilite)
+De Vervoerregio Amsterdam heeft de Regionale Thermometer Mobiliteit gepubliceerd. Met behulp van deze visualisatie wordt een beeld geschetst van hoe de Amsterdammers zich verplaatsen. Hierbij maken zij onder andere gebruik van kaarten, puntdiagrammen en ringdiagrammen. Er zijn echter geen functie voor de gebruiker die ervoor zorgen dat de visualisatie interactief wordt. (https://www.metropoolregioamsterdam.nl/artikel/20180601-vervoerregio-lanceert-regionale-thermometer-mobilite)
 
 Een andere vergelijkbare visualisatie is die van het Kennisinstituut voor Mobiliteitsbeleid. Zij laten met behulp van een gestapelde lijn grafiek zien hoe de verdeling is tussen de verschillende vervoerswijzen. Door over de grafiek te bewegen zijn precieze hoeveelheden te zien. (https://www.kimnet.nl/mobiliteitsbeeld#personenvervoer-article1)
 
 ### Moeilijkste onderdelen
 * Dat de connecties tussen de verschillende weergave vlekkeloos verlopen
-* Hoe een ringdiagram wordt geimplementeerd
-* Het invoegen van een checkbox bij de scatterplot
+* Hoe een ringdiagram wordt geïmplementeerd
+* Het invoegen van een checkbox en een slider
 
