@@ -7,7 +7,7 @@ Dagelijkse verplaatst men zich, maar het werk, voor boodschappen of om een hobby
 ## Oplossing
 Om erachter te komen hoe de Nederlander zich verplaatst, wordt in kaart gebracht hoeveel reizigerskilometers er per provincie worden afgelegd, welke vervoerswijze wordt gebruikt en op welk tijdstip van de week en dag dit plaats vindt.
 
-![](doc/Schets.png)
+![](doc/Schets.PNG)
 
 Op de kaart is voor verscheidene jaren te zien hoeveel reizigerskilometers er per provincie worden afgelegd. De provincies zijn aanklikbaar waarna in een ringdiagram te zien is op welke wijze men zich vervoerd en tegelijkertijd wordt in een scatterplot zichtbaar hoe de verhouding is tussen de hoeveelheid minuten en het aantal kilometers. Als er op een vervoerswijze in de ringdiagram wordt geklikt zal de scatterplot worden geüpdatet voor de desbetreffende vervoerswijze.
 
