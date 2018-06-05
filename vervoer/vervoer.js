@@ -11,7 +11,6 @@ window.onload = function() {
 
   d3.queue()
     .defer(d3.json, "reizigerskilometers.json")
-    .defer(d3.json, "vervoerswijze.json")
     .defer(d3.xml, "Nederland.svg")
     .awaitAll(grafieken);
 
@@ -32,8 +31,7 @@ function kaart(response) {
 
   // data opslaan
   var reizigerskilometers = response["0"]["data"]
-  var vervoerswijze = response["1"]["data"]
-  document.body.appendChild(response[2].documentElement);
+  document.body.appendChild(response[1].documentElement);
 
   var svg = d3.selectAll("#Noord-Holland, #Zuid-Holland, #Zeeland, #Flevoland, #Utrecht, #Noord-Brabant, #Friesland, #Groningen, #Drenthe, #Overijssel, #Gelderland, #Limburg")
               .style("fill", "Indigo")
