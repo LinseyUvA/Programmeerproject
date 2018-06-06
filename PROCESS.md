@@ -7,7 +7,7 @@ Linsey Schaap (11036109)
 * Design document afgemaakt
 * Begonnen aan ringdiagram
   * tooltip achter ringen
-  * sommige kleuren komen twee keer voor andere geen 1x
+  * tekst van tooltip valt buiten het beeld (marge rechts vergroten zorgt voor kleinere ringdiagram)
   
   ![](doc/tooltipAchterRing.PNG)
   
