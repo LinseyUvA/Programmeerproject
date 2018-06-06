@@ -11,6 +11,6 @@ Linsey Schaap (11036109)
   
   ![](doc/tooltipAchterRing.PNG)
   
-* Tooltip kaart obstract gemaakt maar nog niet op de juiste plek
+* Tooltip kaart absoluut gemaakt maar nog niet op de juiste plek
 
 ![](doc/tooltipkaart.PNG)
