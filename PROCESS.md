@@ -14,3 +14,8 @@ Linsey Schaap (11036109)
 * Tooltip kaart absoluut gemaakt maar nog niet op de juiste plek
 
 ![](doc/tooltipkaart.PNG)
+
+### Donderdag
+* Verder gegaan aan de ringdiagram
+ * Update functie doet het nu als er op de kaart wordt geklikt
+ * Tooltip staat nu voor de ringen
