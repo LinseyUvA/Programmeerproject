@@ -1,5 +1,6 @@
 # Hoe verplaatst de Nederlander zich?
 Linsey Schaap (11036109)
+
 https://linseyuva.github.io/Programmeerproject/
 
 ## Applicatiedoelen
