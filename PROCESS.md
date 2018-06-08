@@ -22,3 +22,5 @@ Linsey Schaap (11036109)
  * Er zijn 4 provincies; Utrecht, Zeeland, Groningen en Friesland die twee rode blokken hebben
  
  ![](doc/rodeBlokken.PNG)
+
+* Begonnen aan de scatterplot, maar problemen met de tooltip die niet wilt verschijnen wanner je met je muis over een cirkel beweegt
