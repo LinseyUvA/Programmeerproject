@@ -17,9 +17,9 @@ Linsey Schaap (11036109)
 
 ### Donderdag
 * Verder gegaan aan de ringdiagram
- * Update functie doet het nu als er op de kaart wordt geklikt
- * Tooltip staat nu voor de ringen
- * Er zijn 4 provincies; Utrecht, Zeeland, Groningen en Friesland die twee rode blokken hebben
+  * Update functie doet het nu als er op de kaart wordt geklikt
+  * Tooltip staat nu voor de ringen
+  * Er zijn 4 provincies; Utrecht, Zeeland, Groningen en Friesland die twee rode blokken hebben
  
  ![](doc/rodeBlokken.PNG)
 
