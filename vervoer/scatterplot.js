@@ -6,7 +6,7 @@ function scatterplot(vervoerswijze, provincie){
     };
   };
   // maak een SVG element
-  var svg = d3.select("body")
+  var svg = d3.select("#scatterplotContainer")
               .append("svg")
               .attr("height", hoogte)
               .attr("width", breedte);
@@ -67,14 +67,14 @@ function scatterplot(vervoerswijze, provincie){
      .style("text-anchor", "middle")
      .text("Reisduur (minuten)");
 
-   // voeg een titel aan de scatterplot toe
-   svg.append("text")
-      .attr("class", "title")
-      .attr("x", breedte / 2 )
-      .attr("y", marge.boven / 2)
-      .attr("font-size", "18px")
-      .attr("text-anchor", "middle")
-      .text("De relatie tussen de afstand en de de reisduur per provincie");
+   // // voeg een titel aan de scatterplot toe
+   // svg.append("text")
+   //    .attr("class", "title")
+   //    .attr("x", breedte / 2 )
+   //    .attr("y", marge.boven / 2)
+   //    .attr("font-size", "18px")
+   //    .attr("text-anchor", "middle")
+   //    .text("De relatie tussen de afstand en de de reisduur per provincie");
 
   // maak de cirkels voor de scatterplot
   svg.selectAll("circle")
@@ -87,7 +87,13 @@ function scatterplot(vervoerswijze, provincie){
        return y(d["Reisduur"]); })
      .attr("r", 5)
      .attr("fill", "rgb(190,186,218)")
-     .attr("stroke", "Black");
+     .attr("stroke", "Black")
+     .on("mouseover", function() {
+       infoKnop.style("display", null);
+       d3.select(this).style("fill", "SlateGrey");})
+     .on("mouseout", function() {
+       infoKnop.style("display", "none");
+       d3.select(this).style("fill", "rgb(190,186,218)");});
 
    // creëer een infoKnop
    var infoKnop = svg.append("g")
@@ -96,6 +102,6 @@ function scatterplot(vervoerswijze, provincie){
 
    // voeg de informatie toe aan de infoKnop
    infoKnop.append("text")
-     .attr("x", straal / 2)
+     .attr("x", 40)
      .attr("dy", "1.2em");
 }

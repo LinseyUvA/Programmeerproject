@@ -22,7 +22,7 @@ function ringdiagram(reizigerskilometers, provincie){
               .sort(null);
 
   // creëer een format voor een afbeelding
-  var svg = d3.select("body")
+  var svg = d3.select("#ringdiagramContainer")
               .append("svg")
               .attr("class", "diagram")
               .attr("height", hoogte)
@@ -46,7 +46,7 @@ function ringdiagram(reizigerskilometers, provincie){
                          var xPos = d3.mouse(this)[0] - marge.rechts;
                          var yPos = d3.mouse(this)[1] - marge.beneden;
                          infoKnop2.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                         infoKnop2.select("text").text(d.data.Vervoerswijze + ": " + d.data.Afstand + " km");});
+                         infoKnop2.select("text").text(d.data.Afstand + " km");});
 
   ring.append("path")
              .attr("d", arc)
@@ -65,6 +65,36 @@ function ringdiagram(reizigerskilometers, provincie){
 
   // voeg de informatie toe aan de infoKnop
   infoKnop2.append("text")
-    .attr("x", straal / 2)
+    .attr("x", 40)
     .attr("dy", "1.2em");
+
+  vervoer = ["Auto (bestuurder)", "Auto (passagier)", "Trein", "Bus/tram/metro", "Brom-/snorfiets", "Fiets", "Lopen"]
+
+  // maak legenda voor de kleuren
+  var legenda = svg.append("g")
+                   .attr("class", "legend")
+
+  // maak de vakjes voor de legenda
+  legenda.selectAll("rect")
+          .data(vervoer)
+          .enter().append("rect")
+          .attr("height", 8)
+          .attr("width", 8)
+          .attr("x", -260)
+          .attr("y", function(d, i) {
+            return i * 16
+          })
+          .style("fill", kleur);
+
+  // voeg tekst toe aan de legenda
+  legenda.selectAll("text")
+         .data(vervoer)
+         .enter()
+         .append("text")
+         .attr("x", -250)
+         .attr("y", function(d, i) {
+           return i * 16 + 3})
+         .attr("dy", ".35em")
+         .text(function(d,i) {
+           return vervoer[i]})
 }

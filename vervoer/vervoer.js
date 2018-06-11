@@ -11,7 +11,7 @@ var hoogte = 300;
 var breedte = 500;
 
 // marges vast leggen
-var marge = {boven: 70, beneden: 20, rechts: 120, links: 120};
+var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
 var grafiekHoogte = hoogte - marge.boven - marge.beneden;
 var grafiekBreedte = breedte - marge.rechts - marge.links;
 var straal = grafiekBreedte / 2;
@@ -33,8 +33,8 @@ window.onload = function() {
     // data opslaan
     var reizigerskilometers = response["0"]["data"];
     var vervoerswijze = response["1"]["data"];
-    document.body.appendChild(response[2].documentElement);
-    kaart(reizigerskilometers);
+    document.getElementById("kaartContainer").appendChild(response[2].documentElement);
+    kaart(reizigerskilometers, vervoerswijze);
     ringdiagram(reizigerskilometers, "Nederland");
     scatterplot(vervoerswijze, "Nederland");
   };
@@ -50,7 +50,7 @@ function updateRingdiagram(reizigerskilometers, provincie){
   d3.selectAll(".arc").remove();
 
   // selecteer het figuur waar aanpassingen aan gedaan worden
-  var svg = d3.select("body")
+  var svg = d3.select("#ringdiagramContainer")
               .select(".diagram")
               .attr("height", hoogte)
               .attr("width", breedte)
@@ -80,13 +80,13 @@ function updateRingdiagram(reizigerskilometers, provincie){
                   var xPos = d3.mouse(this)[0] - marge.rechts;
                   var yPos = d3.mouse(this)[1] - marge.beneden;
                   infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                  infoKnop.select("text").text(d.data.Vervoerswijze + ": " + d.data.Afstand + " km");});
+                  infoKnop.select("text").text(d.data.Afstand + " km");});
 
   ring.append("path")
       .attr("d", arc)
       .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)})
       .transition()
-      .duration(300);
+      .duration(1500);
 
    // voeg een ondertitel aan de staafdiagram toe
    d3.select(".ondertitel")
@@ -99,6 +99,61 @@ function updateRingdiagram(reizigerskilometers, provincie){
 
   // voeg de informatie toe aan de infoKnop
   infoKnop.append("text")
-          .attr("x", straal / 2)
+          .attr("x", 40)
           .attr("dy", "1.2em");
+}
+
+function updateScatterplot(vervoerswijze, provincie){
+  dataVervoerswijze = []
+  for (var i = 0; i < vervoerswijze.length; i++) {
+    if (vervoerswijze[i].Periode == "2010" && vervoerswijze[i].Provincie == provincie && vervoerswijze[i].Vervoerswijze == "Totaal") {
+      dataVervoerswijze.push(vervoerswijze[i]);
+    };
+  };
+
+  console.log("hoi")
+  // maak een SVG element
+  var svg = d3.select("#scatterplotContainer")
+              .select("svg")
+              .attr("height", hoogte)
+              .attr("width", breedte);
+
+  // maak een schaalfunctie voor de x waarden
+  var x = d3.scaleLinear()
+            .domain([d3.min(dataVervoerswijze, function(d) {
+              return d["Afstand"];}), d3.max(dataVervoerswijze, function(d) {
+              return d["Afstand"];})])
+            .range([marge.links, grafiekBreedte + marge.links]);
+
+
+  // maak een schaalfunctie voor de y waarden
+  var y = d3.scaleLinear()
+            .domain([d3.min(dataVervoerswijze, function(d) {
+              return d["Reisduur"];}), d3.max(dataVervoerswijze, function(d) {
+              return d["Reisduur"];})])
+            .range([grafiekHoogte + marge.boven, marge.boven])
+
+  // creëer een x-as
+  var asX = d3.axisBottom(x)
+
+  // voeg de x-as en waarden toe
+  svg.select("g")
+     .attr("class", "axis")
+     .attr("transform", "translate(" + 0 + "," + (grafiekHoogte + marge.boven)  + ")")
+     .transition()
+     .duration(500)
+     .call(asX)
+     .attr("font-size", "10px");
+
+   // // creëer een y-as
+   // var asY = d3.axisLeft(y);
+   //
+   // // voeg de y-as en waarden toe
+   // svg.select("g")
+   //    .attr("class", "axis")
+   //    .attr("transform", "translate(" + marge.links + "," + 0 + ")")
+   //    .transition()
+   //    .duration(500)
+   //    .call(asY)
+   //    .attr("font-size", "10px");
 }

@@ -5,9 +5,9 @@
  * Dit script...
  *
 **/
-function kaart(reizigerskilometers) {
+function kaart(reizigerskilometers, vervoerswijze) {
   // creëer een infoKnop
-  var infoKnop = d3.select("body").append("g")
+  var infoKnop = d3.select("#kaartContainer").append("g")
                    .attr("class", "tooltipje");
 
   dataReizigers = [];
@@ -29,7 +29,9 @@ function kaart(reizigerskilometers) {
                 infoKnop.style("display", null);
                 d3.select(this).style("fill", "rgb(190,186,218)");})
               .on("mousemove", function(d) {
-                infoKnop.html("Er zijn in " + d.Provincie + " zijn er " + d.Afstand + " reizigerskilometers <br/>");})
+                infoKnop.html("Er in " + d.Provincie + " zijn er " + d.Afstand + " reizigerskilometers <br/>");})
               .on("click", function(d) {
-                  updateRingdiagram(reizigerskilometers, d.Provincie);})
+                  updateRingdiagram(reizigerskilometers, d.Provincie);
+                  updateScatterplot(vervoerswijze, d.Provincie);})
+
 }
