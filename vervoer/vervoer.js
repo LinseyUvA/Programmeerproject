@@ -48,7 +48,6 @@ function updateRingdiagram(reizigerskilometers, provincie){
     };
   };
   d3.selectAll(".arc").remove();
-  d3.selectAll(".ondertitel").remove();
 
   // selecteer het figuur waar aanpassingen aan gedaan worden
   var svg = d3.select("body")
@@ -62,35 +61,36 @@ function updateRingdiagram(reizigerskilometers, provincie){
                 .range(["rgb(141,211,199)","rgb(255,255,179)","rgb(190,186,218)","rgb(251,128,114)","rgb(128,177,211)","rgb(253,180,98)","rgb(179,222,105)","rgb(252,205,229)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
 
   var pie = d3.pie()
-              .value(function(d){return d.Afstand});
+              .value(function(d){return d.Afstand})
+              .sort(null);
 
   var ring = svg.selectAll(".arc")
-                       .data(pie(dataReizigers))
-                       .enter()
-                       .append("g")
-                       .attr("class", "arc")
-                       // maak de staven interactief
-                       .on("mouseover", function() {
-                         infoKnop.style("display", null);
-                         d3.select(this).style("stroke", "SlateGrey");})
-                       .on("mouseout", function() {
-                         infoKnop.style("display", "none");
-                         d3.select(this).style("stroke", null);})
-                       .on("mousemove", function(d) {
-                         var xPos = d3.mouse(this)[0] - marge.rechts;
-                         var yPos = d3.mouse(this)[1] - marge.beneden;
-                         infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                         infoKnop.select("text").text(d.data.Vervoerswijze + ": " + d.data.Afstand + " km");});
+                .data(pie(dataReizigers))
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+                // maak de staven interactief
+                .on("mouseover", function() {
+                  infoKnop.style("display", null);
+                  d3.select(this).style("stroke", "SlateGrey");})
+                .on("mouseout", function() {
+                  infoKnop.style("display", "none");
+                  d3.select(this).style("stroke", null);})
+                .on("mousemove", function(d) {
+                  var xPos = d3.mouse(this)[0] - marge.rechts;
+                  var yPos = d3.mouse(this)[1] - marge.beneden;
+                  infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
+                  infoKnop.select("text").text(d.data.Vervoerswijze + ": " + d.data.Afstand + " km");});
 
   ring.append("path")
       .attr("d", arc)
-      .attr("fill", function(d) {return kleur(d.data.Afstand)});
+      .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)})
+      .transition()
+      .duration(300);
 
    // voeg een ondertitel aan de staafdiagram toe
-   svg.append("text")
-      .attr("class", "ondertitel")
-      .text(provincie)
-      .style("text-anchor", "middle");
+   d3.select(".ondertitel")
+      .text(provincie);
 
   // creëer een infoKnop
   var infoKnop = svg.append("g")
@@ -192,7 +192,7 @@ function scatterplot(vervoerswijze, provincie){
        return y(d["Reisduur"]); })
      .attr("r", 5)
      .attr("fill", "rgb(190,186,218)")
-     .attr("stroke", "#FFFFFF");
+     .attr("stroke", "Black");
 
    // creëer een infoKnop
    var infoKnop = svg.append("g")

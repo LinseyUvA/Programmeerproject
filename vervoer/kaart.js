@@ -18,6 +18,7 @@ function kaart(reizigerskilometers) {
   };
 
   var svg = d3.selectAll("#Zeeland, #Noord-Holland, #Zuid-Holland, #Flevoland, #Utrecht, #Noord-Brabant, #Friesland, #Groningen, #Drenthe, #Overijssel, #Gelderland, #Limburg")
+              .attr("class", "kaart")
               .style("fill", "rgb(190,186,218)")
               .data(dataReizigers)
               // maak de staven interactief

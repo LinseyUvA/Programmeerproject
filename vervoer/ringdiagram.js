@@ -18,7 +18,8 @@ function ringdiagram(reizigerskilometers, provincie){
                 .range(["rgb(141,211,199)","rgb(255,255,179)","rgb(190,186,218)","rgb(251,128,114)","rgb(128,177,211)","rgb(253,180,98)","rgb(179,222,105)","rgb(252,205,229)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"]);
 
   var pie = d3.pie()
-              .value(function(d){return d.Afstand});
+              .value(function(d){return d.Afstand})
+              .sort(null);
 
   // creëer een format voor een afbeelding
   var svg = d3.select("body")
@@ -49,7 +50,7 @@ function ringdiagram(reizigerskilometers, provincie){
 
   ring.append("path")
              .attr("d", arc)
-             .attr("fill", function(d) {return kleur(d.data.Afstand)});
+             .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)});
 
    // voeg een ondertitel aan de staafdiagram toe
    svg.append("text")

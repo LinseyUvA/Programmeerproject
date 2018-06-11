@@ -4,3 +4,11 @@
   position: absolute;
   z-index: 999;
 }
+
+body {
+    position: relative;
+}
+
+#section1 {padding-top:50px;height:800px}
+#section2 {padding-top:50px;height:800px; background-color: LightGray;}
+#section3 {padding-top:50px;height:800px}

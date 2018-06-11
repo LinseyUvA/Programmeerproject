@@ -17,15 +17,56 @@ Dit html bestand...
         <script src="ringdiagram.js"></script>
         <script src="vervoer.js"></script>
 
+        <!--  Inladen van bootstrap -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       </head>
 
-    <body>
-      <div class="container-fluid">
-        <p align = "right"> Linsey Schaap (11036109) </p>
-        <p class = "bron" align = "right"><a href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83497ned/table?ts=1528104865883">Bron</a></p>
-        <h1 align = "center">Hoe verplaatst de Nederlander zich?</h1><br><br>
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li><a href="#section1">Home</a></li>
+                <li><a href="#section2">Visualisaties</a></li>
+                <li><a href="#section3">Bronnen</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
 
+      <div id="section1" class="container-fluid">
+        <h1>Home</h1>
+        <h2 align = "center">Hoe verplaatst de Nederlander zich?</h1>
+        <p align = "middle"> Linsey Schaap (11036109) </p>
       </div>
+      <div id="section2" class="container-fluid">
+        <h1>Visualisaties</h1>
+        <p> Hier komen alle visualisaties</p>
+        <div id="container">
+          <div id="kaart"></div>
+        </div>
+      </div>
+      <div id="section3" class="container-fluid">
+        <h1>Bronnen</h1>
+        <p class = "bron"><a href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83497ned/table?ts=1528104865883">Reizigerskilometers</a></p>
+        <p class = "bron"><a href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83498ned/table?ts=1528113717793">Kenmerken verplaatsing</a></p>
+      </div>
+
+    </div>
+  </div>
   </body>
 
 </html>
