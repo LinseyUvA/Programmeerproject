@@ -34,3 +34,11 @@ Linsey Schaap (11036109)
 * Bootstrap toegevoegd
   * Begin gemaakt aan layout
   * Krijg de visualisaties niet binnen de verschillende secties. Met hulp erachter gekomen dat een element niet aan de body moet worden toegewezen, maar aan de juiste container
+
+### Dinsdag
+* Layout
+  * De visualisaties staan nu allemaal op de juiste plek
+* Verder gegaan aan de scatterplot
+  * Update functie aangemaakt, waarbij de assen een trasition hebben, maar de cirkels nog niet.
+  * Tooltip 2 klopt nog niet, omdat hij altijd aangeeft dat het om Nederland gaat
+  * Een checkbox toegevoegd (werkt nog niet optimaal, omdat hij bij het klikken op een nieuwe provincies alle cirkels weer laat zien, ongeacht of er delen in de checkbox uit staan)
