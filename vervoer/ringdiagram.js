@@ -7,6 +7,16 @@
 **/
 
 function ringdiagram(reizigerskilometers, provincie){
+
+  // marges vast leggen
+  var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
+  var grafiekHoogte = hoogte - marge.boven - marge.beneden;
+  var grafiekBreedte = breedte - marge.rechts - marge.links;
+  var straal = grafiekBreedte / 2;
+  var arc = d3.arc()
+              .outerRadius(straal - 10)
+              .innerRadius(straal - 50);
+
   dataReizigers = [];
   for (var i = 0; i < reizigerskilometers.length; i++) {
     if (reizigerskilometers[i].Periode == "2010" && reizigerskilometers[i].Provincie == provincie && reizigerskilometers[i].Vervoerswijze != "Totaal") {
@@ -37,16 +47,16 @@ function ringdiagram(reizigerskilometers, provincie){
                        .attr("class", "arc")
                        // maak de staven interactief
                        .on("mouseover", function() {
-                         infoKnop2.style("display", null);
+                         infoKnop.style("display", null);
                          d3.select(this).style("stroke", "SlateGrey");})
                        .on("mouseout", function() {
-                         infoKnop2.style("display", "none");
+                         infoKnop.style("display", "none");
                          d3.select(this).style("stroke", null);})
                        .on("mousemove", function(d) {
                          var xPos = d3.mouse(this)[0] - marge.rechts;
                          var yPos = d3.mouse(this)[1] - marge.beneden;
-                         infoKnop2.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                         infoKnop2.select("text").text(d.data.Afstand + " km");});
+                         infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
+                         infoKnop.select("text").text(d.data.Afstand + " km");});
 
   ring.append("path")
              .attr("d", arc)
@@ -59,12 +69,12 @@ function ringdiagram(reizigerskilometers, provincie){
       .style("text-anchor", "middle");
 
   // creëer een infoKnop
-  var infoKnop2 = svg.append("g")
+  var infoKnop = svg.append("g")
       .attr("class", "tooltipje")
       .style("display", "none");
 
   // voeg de informatie toe aan de infoKnop
-  infoKnop2.append("text")
+  infoKnop.append("text")
     .attr("x", 40)
     .attr("dy", "1.2em");
 
@@ -82,7 +92,7 @@ function ringdiagram(reizigerskilometers, provincie){
           .attr("width", 8)
           .attr("x", -260)
           .attr("y", function(d, i) {
-            return i * 16
+            return i * 16 - 110
           })
           .style("fill", kleur);
 
@@ -93,7 +103,7 @@ function ringdiagram(reizigerskilometers, provincie){
          .append("text")
          .attr("x", -250)
          .attr("y", function(d, i) {
-           return i * 16 + 3})
+           return i * 16 - 107})
          .attr("dy", ".35em")
          .text(function(d,i) {
            return vervoer[i]})
