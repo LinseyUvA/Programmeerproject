@@ -1,4 +1,12 @@
-function scatterplot(vervoerswijze, provincie){
+/*
+ * Naam: Linsey Schaap
+ * Studentnummer: 11036109
+ *
+ * Dit script...
+ *
+**/
+
+function scatterplot(vervoerswijze, provincie, middel){
 
   // marges vast leggen
   var marge = {boven: 20, beneden: 20, rechts: 20, links: 60};
@@ -114,10 +122,10 @@ function scatterplot(vervoerswijze, provincie){
        infoKnop.style("display", "none");
        d3.select(this).style("fill", "rgb(190,186,218)");})
      .on("mousemove", function(d) {
-         var xPos = d3.mouse(this)[0] - marge.rechts;
-         var yPos = d3.mouse(this)[1] - marge.beneden;
-         infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-         infoKnop.select("text").text(d.Verplaatsing);})
+       var xPos = d3.mouse(this)[0] - marge.rechts;
+       var yPos = d3.mouse(this)[1] - marge.beneden;
+       infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
+       infoKnop.select("text").text(d.Verplaatsing);})
      .on("click", function(d) {
        infoKnop2.html("<br/>Er wordt in " + d.Provincie + " op " + d.Verplaatsing + " " + d.Afstand + " km afgelegd in " + d.Reisduur + " minuten<br/>");});
 
@@ -127,9 +135,9 @@ function scatterplot(vervoerswijze, provincie){
    d3.selectAll(".myCheckbox")
      .property("checked", true)
      .on("change", function() {
-       update(dataVervoerswijze, provincie)})
+       update(dataVervoerswijze, provincie, "Totaal")})
 }
-function update(dataVervoerswijze, provincie){
+function update(dataVervoerswijze, provincie, middel){
   var choices = [];
   d3.selectAll(".myCheckbox").each(function(d){
     cb = d3.select(this);
@@ -141,7 +149,7 @@ function update(dataVervoerswijze, provincie){
   if(choices.length > 0){
     newData = data.filter(function(d,i){return choices.includes(d);});
   } else {
-    newData = data;
+    alert("Er moet minstens één onderdeel worden geselecteerd");
   }
 
   dataNieuw = []
@@ -151,10 +159,10 @@ function update(dataVervoerswijze, provincie){
     };
   };
 
-  updateScatterplot(dataNieuw, provincie)
+  updateScatterplot(dataNieuw, provincie, middel)
 }
 
-function updateScatterplot(vervoerswijze, provincie){
+function updateScatterplot(vervoerswijze, provincie, middel){
   d3.selectAll("circle").remove()
   d3.selectAll(".tooltipje2").remove()
 
@@ -166,7 +174,7 @@ function updateScatterplot(vervoerswijze, provincie){
 
   dataVervoerswijze = []
   for (var i = 0; i < vervoerswijze.length; i++) {
-    if (vervoerswijze[i].Periode == "2010" && vervoerswijze[i].Provincie == provincie && vervoerswijze[i].Vervoerswijze == "Totaal") {
+    if (vervoerswijze[i].Periode == "2010" && vervoerswijze[i].Provincie == provincie && vervoerswijze[i].Vervoerswijze == middel) {
       dataVervoerswijze.push(vervoerswijze[i]);
     };
   };

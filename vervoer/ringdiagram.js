@@ -6,7 +6,7 @@
  *
 **/
 
-function ringdiagram(reizigerskilometers, provincie){
+function ringdiagram(reizigerskilometers, vervoerswijze, provincie){
 
   // marges vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
@@ -40,6 +40,9 @@ function ringdiagram(reizigerskilometers, provincie){
               .append("g")
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
 
+  var infoKnop3 = d3.select("#checkboxContainer").append("g")
+                    .attr("class", "tooltipje3");
+
   var ring = svg.selectAll("arc")
                        .data(pie(dataReizigers))
                        .enter()
@@ -56,7 +59,15 @@ function ringdiagram(reizigerskilometers, provincie){
                          var xPos = d3.mouse(this)[0] - marge.rechts;
                          var yPos = d3.mouse(this)[1] - marge.beneden;
                          infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                         infoKnop.select("text").text(d.data.Afstand + " km");});
+                         infoKnop.select("text").text(d.data.Afstand + " km");})
+                       .on("click", function(d) {
+                         if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
+                           update(vervoerswijze, provincie, d.data.Vervoerswijze);
+                           infoKnop3.html("<br/><br/>" + d.data.Vervoerswijze);
+                         }
+                         else {
+                           alert("Sorry geen data voor deze vervoerswijze");
+                         }})
 
   ring.append("path")
              .attr("d", arc)
@@ -109,7 +120,7 @@ function ringdiagram(reizigerskilometers, provincie){
            return vervoer[i]})
 }
 
-function updateRingdiagram(reizigerskilometers, provincie){
+function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie){
   // marges vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
@@ -135,6 +146,9 @@ function updateRingdiagram(reizigerskilometers, provincie){
               .append("g")
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
 
+  var infoKnop3 = d3.select("#checkboxContainer").append("g")
+                    .attr("class", "tooltipje3");
+
   var kleur = d3.scaleOrdinal()
                 .range(["rgb(141,211,199)","rgb(255,255,179)","rgb(190,186,218)","rgb(251,128,114)","rgb(128,177,211)","rgb(253,180,98)","rgb(179,222,105)","rgb(252,205,229)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
 
@@ -158,7 +172,15 @@ function updateRingdiagram(reizigerskilometers, provincie){
                   var xPos = d3.mouse(this)[0] - marge.rechts;
                   var yPos = d3.mouse(this)[1] - marge.beneden;
                   infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                  infoKnop.select("text").text(d.data.Afstand + " km");});
+                  infoKnop.select("text").text(d.data.Afstand + " km");})
+                .on("click", function(d) {
+                  if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
+                    update(vervoerswijze, provincie, d.data.Vervoerswijze);
+                    infoKnop3.html("<br/><br/>" + d.data.Vervoerswijze);
+                  }
+                  else {
+                    alert("Sorry geen data voor deze vervoerswijze");
+                  }});
 
   ring.append("path")
       .attr("d", arc)
