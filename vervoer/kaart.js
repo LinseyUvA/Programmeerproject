@@ -31,7 +31,6 @@ function kaart(reizigerskilometers, vervoerswijze) {
               .on("mousemove", function(d) {
                 infoKnop.html("Er in " + d.Provincie + " zijn er " + d.Afstand + " reizigerskilometers <br/>");})
               .on("click", function(d) {
-                d3.select(".tooltipje2").remove()
                 updateRingdiagram(reizigerskilometers, d.Provincie);
                 update(vervoerswijze, d.Provincie);})
 
