@@ -134,8 +134,8 @@ function updateScatterplot(vervoerswijze, provincie){
     .attr("x", 15)
     .attr("dy", "1.2em");
 
-  var infoKnop2 = d3.select("#scatterplotContainer")
-                    .select(".tooltipje2");
+  var infoKnop2 = d3.select("#scatterplotContainer").append("g")
+                    .attr("class", "tooltipje2");
 
   dataVervoerswijze.forEach(function(d) {
     d["Reisduur"] = parseFloat(d["Reisduur"]);
