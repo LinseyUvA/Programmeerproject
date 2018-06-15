@@ -25,6 +25,7 @@ window.onload = function() {
     var reizigerskilometers = response["0"]["data"];
     var vervoerswijze = response["1"]["data"];
     document.getElementById("kaartContainer").appendChild(response[2].documentElement);
+    slider();
     kaart(reizigerskilometers, vervoerswijze);
     ringdiagram(reizigerskilometers, vervoerswijze, "Nederland");
     scatterplot(vervoerswijze, "Nederland", "Totaal");
