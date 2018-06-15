@@ -53,3 +53,9 @@ Linsey Schaap (11036109)
   * Wanneer de klikfunctie wordt gebruikt wordt er aangegeven op welke functie is geklikt. De plek waar dit wordt geprint kan effectiever.
 
  ![](doc/printVervoerswijze.PNG)
+
+### Donderdag
+* Slider
+  * Onderzoek gedaan naar verschillende sliders en een aantal proberen te implementeren, maar nog zonder succes. Later verder aan werken met behulp van een nieuwe bron die ik heb gevonden.
+
+![](doc/slider.PNG)
