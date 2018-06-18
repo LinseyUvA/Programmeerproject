@@ -59,3 +59,13 @@ Linsey Schaap (11036109)
   * Onderzoek gedaan naar verschillende sliders en een aantal proberen te implementeren, maar nog zonder succes. Later verder aan werken met behulp van een nieuwe bron die ik heb gevonden.
 
 ![](doc/slider.PNG)
+
+## Week 3
+### Maandag
+* Slider gemaakt
+  * Alles wordt geupdatet voor het juiste jaartal, dus de ringdiagram, de kaart en de scatterplot
+  * Hij is nog wel een beetje buggy, want je kan niet klikken op een willekeurig jaartal
+* Scatterplot
+  * De bolletjes worden nu groter wanneer je eroverheen gaat
+  * Kleurverschil aangebracht tussen dagen en tijdstippen
+  * Wanneer over de box van de checkbox wordt gehoverd wordt het bolletje ook groter, alleen nog niet wanneer er op een andere provincie wordt geklikt

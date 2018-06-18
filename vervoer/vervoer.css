@@ -12,6 +12,27 @@
   text-anchor: middle;
 }
 
+.xAs {
+  font-size: 10px;
+}
+
+.yAs {
+  font-size: 10px;
+}
+
+.titelAs{
+  fill: Gray;
+  text-anchor: middle;
+}
+
+.ondertitel {
+  text-anchor: middle;
+}
+
+.myCheckbox{
+  font-size: 32px;
+}
+
 #section1 {padding-top:50px;height:800px;background-color: LightGray;}
 #section2 {padding-top:50px;height:800px}
 #section3 {padding-top:50px;height:800;background-color: LightGray;}

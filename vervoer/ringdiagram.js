@@ -6,7 +6,7 @@
  *
 **/
 
-function ringdiagram(reizigerskilometers, vervoerswijze, provincie){
+function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
 
   // marges vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
@@ -19,7 +19,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie){
 
   dataReizigers = [];
   for (var i = 0; i < reizigerskilometers.length; i++) {
-    if (reizigerskilometers[i].Periode == "2010" && reizigerskilometers[i].Provincie == provincie && reizigerskilometers[i].Vervoerswijze != "Totaal") {
+    if (reizigerskilometers[i].Periode == jaar && reizigerskilometers[i].Provincie == provincie && reizigerskilometers[i].Vervoerswijze != "Totaal") {
       dataReizigers.push(reizigerskilometers[i]);
     };
   };
@@ -62,12 +62,10 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie){
                          infoKnop.select("text").text(d.data.Afstand + " km");})
                        .on("click", function(d) {
                          if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
-                           update(vervoerswijze, provincie, d.data.Vervoerswijze);
-                           infoKnop3.html("<br/><br/>" + d.data.Vervoerswijze);
-                         }
+                           update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
+                           infoKnop3.html("<br/><br/>" + d.data.Vervoerswijze);}
                          else {
-                           alert("Sorry geen data voor deze vervoerswijze");
-                         }})
+                           alert("Sorry geen data voor deze vervoerswijze");}})
 
   ring.append("path")
              .attr("d", arc)
@@ -76,8 +74,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie){
    // voeg een ondertitel aan de staafdiagram toe
    svg.append("text")
       .attr("class", "ondertitel")
-      .text(provincie)
-      .style("text-anchor", "middle");
+      .text(provincie);
 
   // creëer een infoKnop
   var infoKnop = svg.append("g")
@@ -103,8 +100,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie){
           .attr("width", 8)
           .attr("x", -260)
           .attr("y", function(d, i) {
-            return i * 16 - 110
-          })
+            return i * 16 - 110})
           .style("fill", kleur);
 
   // voeg tekst toe aan de legenda
@@ -120,7 +116,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie){
            return vervoer[i]})
 }
 
-function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie){
+function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
   // marges vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
@@ -132,7 +128,7 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie){
 
   dataReizigers = [];
   for (var i = 0; i < reizigerskilometers.length; i++) {
-    if (reizigerskilometers[i].Periode == "2010" && reizigerskilometers[i].Provincie == provincie && reizigerskilometers[i].Vervoerswijze != "Totaal") {
+    if (reizigerskilometers[i].Periode == jaar && reizigerskilometers[i].Provincie == provincie && reizigerskilometers[i].Vervoerswijze != "Totaal") {
       dataReizigers.push(reizigerskilometers[i]);
     };
   };
@@ -175,7 +171,7 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie){
                   infoKnop.select("text").text(d.data.Afstand + " km");})
                 .on("click", function(d) {
                   if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
-                    update(vervoerswijze, provincie, d.data.Vervoerswijze);
+                    update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
                     infoKnop3.html("<br/><br/>" + d.data.Vervoerswijze);
                   }
                   else {
@@ -190,7 +186,7 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie){
 
    // voeg een ondertitel aan de staafdiagram toe
    d3.select(".ondertitel")
-      .text(provincie);
+     .text(provincie);
 
   // creëer een infoKnop
   var infoKnop = svg.append("g")
