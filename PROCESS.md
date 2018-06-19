@@ -66,6 +66,19 @@ Linsey Schaap (11036109)
   * Alles wordt geupdatet voor het juiste jaartal, dus de ringdiagram, de kaart en de scatterplot
   * Hij is nog wel een beetje buggy, want je kan niet klikken op een willekeurig jaartal
 * Scatterplot
+  * De assen een naam gegeven
   * De bolletjes worden nu groter wanneer je eroverheen gaat
   * Kleurverschil aangebracht tussen dagen en tijdstippen
   * Wanneer over de box van de checkbox wordt gehoverd wordt het bolletje ook groter, alleen nog niet wanneer er op een andere provincie wordt geklikt
+
+### Dinsdag
+* Kaart
+  * Kleurenschema gemaakt, maar hij werkt niet vanaf het begin alleen wanneer er overeen is geweest met de muis. Later op de dag opgelost door de volgorde te veranderen van het oproepen van data.
+
+![](doc/kaartKleur.PNG)
+
+* Scatterplot
+  * De bolletjes hebben nu een transition waardoor ze mooi overgaan naar de volgende data als er een update is.
+  * De laatste checkbox kan niet uitgezet worden door de gebruiker
+* Slider
+  * Gevraagd om de bug uit de slider te halen, maar Tim kan het ook niet vinden.

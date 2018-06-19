@@ -38,7 +38,6 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
               return d["Afstand"];})])
             .range([marge.links, grafiekBreedte + marge.links]);
 
-
   // maak een schaalfunctie voor de y waarden
   var y = d3.scaleLinear()
             .domain([d3.min(dataVervoerswijze, function(d) {
@@ -142,7 +141,7 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
        d3.selectAll("circle")
          .attr("r", 5)})
      .on("change", function() {
-       update(dataVervoerswijze, provincie, "Totaal", jaar)})
+       update(vervoerswijze, provincie, "Totaal", jaar)})
 
    // creëer een infoKnop
    var infoKnop = svg.append("g")
@@ -167,25 +166,26 @@ function update(dataVervoerswijze, provincie, middel, jaar){
     }
   });
 
-  if(choices.length > 1){
-    newData = data.filter(function(d,i){return choices.includes(d);});
+  if(choices.length > 0){
+    d3.selectAll(".myCheckbox").each(function(d) {
+      cb = d3.select(this)
+      cb["_groups"]["0"]["0"].disabled = false;
+      newData = data.filter(function(d,i){return choices.includes(d);});
+    })
   }
-  else if (choices.length == 1) {
-    alert("Minstens 1 box selecteren");
+  if (choices.length == 1) {
+    d3.selectAll(".myCheckbox").each(function(d) {
+      cb = d3.select(this)
+      if (cb.property("checked")){
+        cb["_groups"]["0"]["0"].disabled = true;
+      }
+    })
   }
 
-  dataNieuw = []
-  for (var i = 0; i < dataVervoerswijze.length; i++) {
-    if (newData.includes(dataVervoerswijze[i].Verplaatsing)) {
-      dataNieuw.push(dataVervoerswijze[i]);
-    };
-  };
-
-  updateScatterplot(dataNieuw, provincie, middel, jaar)
+  updateScatterplot(dataVervoerswijze, newData, provincie, middel, jaar)
 }
 
-function updateScatterplot(vervoerswijze, provincie, middel, jaar){
-  d3.selectAll("circle").remove()
+function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
   d3.selectAll(".tooltipje2").remove()
 
   // marges vast leggen
@@ -193,12 +193,9 @@ function updateScatterplot(vervoerswijze, provincie, middel, jaar){
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 
-  dataVervoerswijze = []
-  for (var i = 0; i < vervoerswijze.length; i++) {
-    if (vervoerswijze[i].Periode == jaar && vervoerswijze[i].Provincie == provincie && vervoerswijze[i].Vervoerswijze == middel) {
-      dataVervoerswijze.push(vervoerswijze[i]);
-    };
-  };
+  dataVervoer = vervoerswijze.filter(function(d,i) {
+    return (d.Periode == jaar && d.Provincie == provincie && d.Vervoerswijze == middel && dataFilter.includes(d.Verplaatsing));
+  })
 
   // maak een SVG element
   var svg = d3.select("#scatterplotContainer")
@@ -206,22 +203,22 @@ function updateScatterplot(vervoerswijze, provincie, middel, jaar){
               .attr("height", hoogte)
               .attr("width", breedte);
 
-  dataVervoerswijze.forEach(function(d) {
+  dataVervoer.forEach(function(d) {
     d["Reisduur"] = parseFloat(d["Reisduur"]);
     d["Afstand"] = parseInt(d["Afstand"]);
   });
 
   // maak een schaalfunctie voor de x waarden
   var x = d3.scaleLinear()
-            .domain([d3.min(dataVervoerswijze, function(d) {
-              return d["Afstand"];}), d3.max(dataVervoerswijze, function(d) {
+            .domain([d3.min(dataVervoer, function(d) {
+              return d["Afstand"];}), d3.max(dataVervoer, function(d) {
               return d["Afstand"];})])
             .range([marge.links, grafiekBreedte + marge.links]);
 
   // maak een schaalfunctie voor de y waarden
   var y = d3.scaleLinear()
-            .domain([d3.min(dataVervoerswijze, function(d) {
-              return d["Reisduur"];}), d3.max(dataVervoerswijze, function(d) {
+            .domain([d3.min(dataVervoer, function(d) {
+              return d["Reisduur"];}), d3.max(dataVervoer, function(d) {
               return d["Reisduur"];})])
             .range([grafiekHoogte + marge.boven, marge.boven])
 
@@ -235,56 +232,80 @@ function updateScatterplot(vervoerswijze, provincie, middel, jaar){
      .call(asX)
      .attr("font-size", "10px");
 
-   // creëer een y-as
-   var asY = d3.axisLeft(y);
+  // creëer een y-as
+  var asY = d3.axisLeft(y);
 
-   // voeg de y-as en waarden toe
-   svg.select(".yAs")
-      .transition()
-      .duration(500)
-      .call(asY)
-      .attr("font-size", "10px");
+  // voeg de y-as en waarden toe
+  svg.select(".yAs")
+     .transition()
+     .duration(500)
+     .call(asY)
+     .attr("font-size", "10px");
 
-    dagen = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"]
-    tijden = ["7 tot 9 uur", "9 tot 12 uur", "12 tot 16 uur", "16 tot 18 uur", "18 tot 24 uur"]
+  dagen = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"]
+  tijden = ["7 tot 9 uur", "9 tot 12 uur", "12 tot 16 uur", "16 tot 18 uur", "18 tot 24 uur"]
 
-    // stel een kleur vast voor ieder cijfer voor levens voldoening
-    var bucketKleur = []
-    for (var i = 0; i < dataVervoerswijze.length; i++) {
-      if (dagen.includes(dataVervoerswijze[i].Verplaatsing)) {
-        dataVervoerswijze[i]["bucketKleur"] = "rgb(190,186,218)";
-      }
-      if (tijden.includes(dataVervoerswijze[i].Verplaatsing)) {
-        dataVervoerswijze[i]["bucketKleur"] = "rgb(179,222,105)";
-      }
+  // stel een kleur vast voor ieder cijfer voor levens voldoening
+  var bucketKleur = []
+  for (var i = 0; i < dataVervoer.length; i++) {
+    if (dagen.includes(dataVervoer[i].Verplaatsing)) {
+      dataVervoer[i]["bucketKleur"] = "rgb(190,186,218)";
     }
+    if (tijden.includes(dataVervoer[i].Verplaatsing)) {
+      dataVervoer[i]["bucketKleur"] = "rgb(179,222,105)";
+    }
+  }
 
-   // maak de cirkels voor de scatterplot
-   svg.selectAll("circle")
-      .data(dataVervoerswijze)
-      .enter()
-      .append("circle")
-      .attr("cx", function(d) {
-        return x(d["Afstand"]); })
-      .attr("cy", function(d) {
-        return y(d["Reisduur"]); })
-      .attr("r", 5)
-      .attr("fill", function(d) {
-        return d["bucketKleur"];})
-      .attr("stroke", "Black")
-      .on("mouseover", function() {
-        infoKnop.style("display", null);
-        d3.select(this).style("r", 10);})
-      .on("mouseout", function() {
-        infoKnop.style("display", "none");
-        d3.select(this).style("r", 5)})
-      .on("mousemove", function(d) {
-          var xPos = d3.mouse(this)[0] - marge.rechts;
-          var yPos = d3.mouse(this)[1] - marge.beneden;
-          infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-          infoKnop.select("text").text(d.Verplaatsing);})
-      .on("click", function(d) {
-        infoKnop2.html("<br/>Er wordt in " + d.Provincie + " op " + d.Verplaatsing + " " + d.Afstand + " km afgelegd in " + d.Reisduur + " minuten<br/>");});
+  // maak de cirkels voor de scatterplot
+  var cirkel = svg.selectAll("circle").data(dataVervoer);
+
+  cirkel.exit().remove();
+
+  cirkel.enter()
+        .append("circle")
+        .merge(cirkel)
+        .transition()
+        .duration(500)
+        .attr("cx", function(d) {
+          return x(d["Afstand"]); })
+        .attr("cy", function(d) {
+          return y(d["Reisduur"]); })
+        .attr("r", 5)
+        .attr("fill", function(d) {
+          return d["bucketKleur"];})
+        .attr("stroke", "Black")
+        .attr("id", function(d){
+          if (parseInt(d.Verplaatsing[0])){
+            return d.Verplaatsing.slice(2).replace(/\s+/g, '');}
+          return d.Verplaatsing})
+
+  d3.selectAll("circle")
+    .on("mouseover", function() {
+      infoKnop.style("display", null);
+      d3.select(this).style("r", 10);})
+    .on("mouseout", function() {
+      infoKnop.style("display", "none");
+      d3.select(this).style("r", 5)})
+    .on("mousemove", function(d) {
+        var xPos = d3.mouse(this)[0] - marge.rechts;
+        var yPos = d3.mouse(this)[1] - marge.beneden;
+        infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
+        infoKnop.select("text").text(d.Verplaatsing);})
+    .on("click", function(d) {
+      infoKnop2.html("<br/>Er wordt in " + d.Provincie + " op " + d.Verplaatsing + " " + d.Afstand + " km afgelegd in " + d.Reisduur + " minuten<br/>");});
+
+
+  d3.selectAll(".myCheckbox")
+    .on("mouseover", function() {
+      if (parseInt(this.value[0])){
+        waarde = this.value.slice(2).replace(/\s+/g, '');}
+      else {
+        waarde = this.value;}
+      d3.select("#" + waarde)
+        .attr("r", 10);})
+    .on("mouseout", function() {
+      d3.selectAll("circle")
+        .attr("r", 5)})
 
   // creëer een infoKnop
   var infoKnop = svg.append("g")

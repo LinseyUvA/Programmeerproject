@@ -40,7 +40,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .append("g")
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
 
-  var infoKnop3 = d3.select("#checkboxContainer").append("g")
+  var infoKnop3 = d3.select("#kaartContainer").append("g")
                     .attr("class", "tooltipje3");
 
   var ring = svg.selectAll("arc")
@@ -63,9 +63,10 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                        .on("click", function(d) {
                          if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
                            update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
-                           infoKnop3.html("<br/><br/>" + d.data.Vervoerswijze);}
+                           infoKnop3.html(d.data.Vervoerswijze);}
                          else {
-                           alert("Sorry geen data voor deze vervoerswijze");}})
+                           update(vervoerswijze, provincie, "Totaal", jaar);
+                           infoKnop3.html("Totaal (Geen info over deze vervoerswijze)");}})
 
   ring.append("path")
              .attr("d", arc)
@@ -142,7 +143,7 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .append("g")
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
 
-  var infoKnop3 = d3.select("#checkboxContainer").append("g")
+  var infoKnop3 = d3.select("#kaartContainer").append("g")
                     .attr("class", "tooltipje3");
 
   var kleur = d3.scaleOrdinal()
@@ -172,11 +173,11 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                 .on("click", function(d) {
                   if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
                     update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
-                    infoKnop3.html("<br/><br/>" + d.data.Vervoerswijze);
+                    infoKnop3.html(d.data.Vervoerswijze);
                   }
                   else {
-                    alert("Sorry geen data voor deze vervoerswijze");
-                  }});
+                    update(vervoerswijze, provincie, "Totaal", jaar);
+                    infoKnop3.html("Totaal (Geen info over deze vervoerswijze)");}})
 
   ring.append("path")
       .attr("d", arc)
