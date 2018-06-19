@@ -13,9 +13,9 @@ var breedte = 500;
 window.onload = function() {
 
   d3.queue()
-    .defer(d3.json, "reizigerskilometers.json")
-    .defer(d3.json, "vervoerswijze.json")
-    .defer(d3.xml, "Netherlands.svg")
+    .defer(d3.json, "data/reizigerskilometers.json")
+    .defer(d3.json, "data/vervoerswijze.json")
+    .defer(d3.xml, "data/Netherlands.svg")
     .awaitAll(grafieken);
 
   function grafieken(error, response) {

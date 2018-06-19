@@ -37,7 +37,6 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
     }
   }
 
-
   var svg = d3.selectAll("#Zeeland, #Noord-Holland, #Zuid-Holland, #Flevoland, #Utrecht, #Noord-Brabant, #Friesland, #Groningen, #Drenthe, #Overijssel, #Gelderland, #Limburg")
               .attr("class", "kaart")
               .data(dataReizigers)
@@ -48,6 +47,7 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
               .on("mouseover", function() {
                 infoKnop.style("display", null);
                 d3.select(this).style("stroke-width", 1.5);})
+              
               .on("mouseout", function() {
                 infoKnop.style("display", null);
                 d3.select(this).style("stroke-width", 1)
