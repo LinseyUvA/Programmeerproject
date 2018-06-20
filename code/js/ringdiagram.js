@@ -25,7 +25,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
   };
 
   var kleur = d3.scaleOrdinal()
-                .range(["rgb(141,211,199)","rgb(255,255,179)","rgb(190,186,218)","rgb(251,128,114)","rgb(128,177,211)","rgb(253,180,98)","rgb(179,222,105)","rgb(252,205,229)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"]);
+                .range(["rgb(251,106,74)","rgb(252,146,114)","rgb(252,187,161)","rgb(254,224,210)","rgb(153,0,13)","rgb(203,24,29)","rgb(239,59,44)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
 
   var pie = d3.pie()
               .value(function(d){return d.Afstand})
@@ -51,7 +51,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                        // maak de staven interactief
                        .on("mouseover", function() {
                          infoKnop.style("display", null);
-                         d3.select(this).style("stroke", "SlateGrey");})
+                         d3.select(this).style("stroke", "Black");})
                        .on("mouseout", function() {
                          infoKnop.style("display", "none");
                          d3.select(this).style("stroke", null);})
@@ -147,7 +147,7 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                     .attr("class", "tooltipje3");
 
   var kleur = d3.scaleOrdinal()
-                .range(["rgb(141,211,199)","rgb(255,255,179)","rgb(190,186,218)","rgb(251,128,114)","rgb(128,177,211)","rgb(253,180,98)","rgb(179,222,105)","rgb(252,205,229)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
+                .range(["rgb(251,106,74)","rgb(252,146,114)","rgb(252,187,161)","rgb(254,224,210)","rgb(153,0,13)","rgb(203,24,29)","rgb(239,59,44)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
 
   var pie = d3.pie()
               .value(function(d){return d.Afstand})
@@ -161,7 +161,7 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                 // maak de staven interactief
                 .on("mouseover", function() {
                   infoKnop.style("display", null);
-                  d3.select(this).style("stroke", "SlateGrey");})
+                  d3.select(this).style("stroke", "Black");})
                 .on("mouseout", function() {
                   infoKnop.style("display", "none");
                   d3.select(this).style("stroke", null);})

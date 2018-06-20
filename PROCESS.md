@@ -84,3 +84,8 @@ Linsey Schaap (11036109)
   * Gevraagd om de bug uit de slider te halen, maar Tim kan het ook niet vinden.
 
 ### Woensdag
+* Slider en legenda
+  * De slider werkt nu ook wanneer je er op klikt en ik heb daardoor een hoop onnodige code kunnen verwijderen
+  * Een legenda gemaakt voor de kaart
+* Layout
+  * De kleuren van de site aangepast

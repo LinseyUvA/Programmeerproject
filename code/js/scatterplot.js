@@ -86,10 +86,10 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
    var bucketKleur = []
    for (var i = 0; i < dataVervoerswijze.length; i++) {
      if (dagen.includes(dataVervoerswijze[i].Verplaatsing)) {
-       dataVervoerswijze[i]["bucketKleur"] = "rgb(190,186,218)";
+       dataVervoerswijze[i]["bucketKleur"] = "rgb(89, 140, 192)";
      }
      if (tijden.includes(dataVervoerswijze[i].Verplaatsing)) {
-       dataVervoerswijze[i]["bucketKleur"] = "rgb(179,222,105)";
+       dataVervoerswijze[i]["bucketKleur"] = "rgb(251, 106, 74)";
      }
    }
 
@@ -249,10 +249,10 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
   var bucketKleur = []
   for (var i = 0; i < dataVervoer.length; i++) {
     if (dagen.includes(dataVervoer[i].Verplaatsing)) {
-      dataVervoer[i]["bucketKleur"] = "rgb(190,186,218)";
+      dataVervoer[i]["bucketKleur"] = "rgb(89, 140, 192)";
     }
     if (tijden.includes(dataVervoer[i].Verplaatsing)) {
-      dataVervoer[i]["bucketKleur"] = "rgb(179,222,105)";
+      dataVervoer[i]["bucketKleur"] = "rgb(251, 106, 74)";
     }
   }
 
