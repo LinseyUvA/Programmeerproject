@@ -1,10 +1,10 @@
 # Hoe verplaatst de Nederlander zich?
 Linsey Schaap (11036109)
 
-https://linseyuva.github.io/Programmeerproject/vervoer/index.html
+https://linseyuva.github.io/Programmeerproject/index.html
 
 ## Applicatiedoelen
-Met de applicatie wordt weergegeven op welke manier de Nederlander zich verplaatst. Er kan hierbij specifieker worden gekeken naar verschillende vervoerswijzen, dagen en tijdstippen. 
+Met de applicatie wordt weergegeven op welke manier de Nederlander zich verplaatst. Er kan hierbij specifieker worden gekeken naar verschillende vervoerswijzen, dagen en tijdstippen.
 
 ## Probleemstelling
 Dagelijkse verplaatst men zich, maar het werk, voor boodschappen of om een hobby of sport uit te kunnen oefenen. Maar in welke provincie leggen ze de meeste kilometers of en op welke manier doet men dit. Met deze visualisatie wordt dit in kaart gebracht. Aan de hand van de visualisaties kunnen conclusies worden getrokken die voor de desbetreffende persoon relevant kunnen zijn. Zoals het kiezen van snelste vervoerswijze op dat moment of in de juiste provincie een fietswinkel beginnen.
@@ -43,4 +43,3 @@ Een andere vergelijkbare visualisatie is die van het Kennisinstituut voor Mobili
 * Dat de connecties tussen de verschillende weergave vlekkeloos verlopen
 * Hoe een ringdiagram wordt geïmplementeerd
 * Het invoegen van een checkbox en een slider
-

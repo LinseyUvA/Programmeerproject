@@ -78,7 +78,9 @@ Linsey Schaap (11036109)
 ![](doc/kaartKleur.PNG)
 
 * Scatterplot
-  * De bolletjes hebben nu een transition waardoor ze mooi overgaan naar de volgende data als er een update is.
+  * De bolletjes hebben nu een transition waardoor ze mooi overgaan naar de volgende data als er een update is. Had er eerst problemen mee want alle bolletjes verdwenen de hele tijd wanneer ik gebruik maakte van exit(), maar dankzij assistentie kwamen we er na een tijdje uit dat ze niet verdwenen en kon ik later nog de transition implementeren.
   * De laatste checkbox kan niet uitgezet worden door de gebruiker
 * Slider
   * Gevraagd om de bug uit de slider te halen, maar Tim kan het ook niet vinden.
+
+### Woensdag
