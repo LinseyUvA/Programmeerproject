@@ -94,3 +94,7 @@ Linsey Schaap (11036109)
 * Layout
   * De plek waar de visualisaties staan veranderd aan de hand van bootstrap, door de kolom breedte aan te passen.
   * Een afbeelding gemaakt aan de hand van flaticons voor de site.
+* Slider
+  * De slider update naar Nederland, maar zou dat eigenlijk niet moeten doen, maar de laatst aangeklikte provincie laten zien.
+* Reset knop gemaakt
+  * De knop zet alles terug naar Nederland en 2010, maar zet niet alle vinkjes weer aan (morgen vragen of dat zou moeten)

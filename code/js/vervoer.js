@@ -25,7 +25,10 @@ window.onload = function() {
     // data opslaan
     var reizigerskilometers = response["0"]["data"];
     var vervoerswijze = response["1"]["data"];
+    
     document.getElementById("kaartContainer").appendChild(response[2].documentElement);
+    document.getElementById("knop").onclick = function() {reset(reizigerskilometers, vervoerswijze, "Nederland", "Totaal", "2010")};
+
     slider(reizigerskilometers, vervoerswijze);
     legenda();
     kaart(reizigerskilometers, vervoerswijze, "2010");

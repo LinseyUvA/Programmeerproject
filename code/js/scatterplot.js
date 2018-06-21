@@ -189,7 +189,7 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
   d3.selectAll(".tooltipje2").remove()
 
   // marges vast leggen
-  var marge = {boven: 20, beneden: 20, rechts: 20, links: 20};
+  var marge = {boven: 20, beneden: 20, rechts: 20, links: 25};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 

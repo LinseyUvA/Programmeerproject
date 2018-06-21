@@ -8,6 +8,8 @@
  * https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
  * http://d3-legend.susielu.com/
 **/
+var slider1;
+
 function kaart(reizigerskilometers, vervoerswijze, jaar) {
 
   // creëer een infoKnop
@@ -47,25 +49,24 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
               .on("mousemove", function(d) {
                 infoKnop.html("Er in " + d.Provincie + "<br/>zijn er " + d.Afstand + "<br/> reizigerskilometers <br/>");})
               .on("click", function(d) {
-                d3.selectAll(".tooltipje3").remove()
-                infoKnop4.html("Selectie: " + d.Provincie);
+                d3.select(".tooltipje3").remove();
+                d3.select(".tooltipje4").html("Selectie: " + d.Provincie);
                 updateRingdiagram(reizigerskilometers, vervoerswijze, d.Provincie, jaar);
                 update(vervoerswijze, d.Provincie, "Totaal", jaar);})
 
 }
 
 function slider(reizigerskilometers, vervoerswijze) {
-
   // marges vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 
   var svg = d3.select("#sliderContainer")
-    .attr("width", grafiekBreedte + marge.links + marge.rechts)
-    .attr("height", grafiekHoogte + marge.boven + marge.beneden);
+              .attr("width", grafiekBreedte + marge.links + marge.rechts)
+              .attr("height", grafiekHoogte + marge.boven + marge.beneden);
 
-  var slider = d3.sliderHorizontal()
+  slider1 = d3.sliderHorizontal()
                  .min(2010)
                  .max(2014)
                  .step(1)
@@ -81,12 +82,13 @@ function slider(reizigerskilometers, vervoerswijze) {
 
    var g = d3.select("#sliderContainer")
              .append("svg")
+             .attr("id", "timTest")
              .attr("width", 600)
              .attr("height", 65)
              .append("g")
              .attr("transform", "translate(30,30)");
 
-   g.call(slider);
+   g.call(slider1);
 }
 
 function legenda() {
@@ -108,4 +110,14 @@ function legenda() {
                   .scale(schaal);
 
   g.call(legenda);
+}
+
+function reset(reizigerskilometers, vervoerswijze, provincie, middel, jaar) {
+  d3.select(".tooltipje").remove();
+  d3.select(".tooltipje3").remove();
+  d3.select(".tooltipje4").remove();
+  slider1.value(2010);
+  kaart(reizigerskilometers, vervoerswijze, jaar);
+  updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar);
+  update(vervoerswijze, provincie, middel, jaar);
 }
