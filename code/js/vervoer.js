@@ -6,6 +6,7 @@
  * Hierbij wordt onderscheid gemaakt tussen verschillende landen en het soort hotel waar deze gasten in verblijven.
  *
 **/
+
 // stel hoogte en breedte vast
 var hoogte = 300;
 var breedte = 500;

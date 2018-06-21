@@ -69,8 +69,8 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                            infoKnop3.html("Totaal (Geen info over deze vervoerswijze)");}})
 
   ring.append("path")
-             .attr("d", arc)
-             .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)});
+      .attr("d", arc)
+      .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)});
 
    // voeg een ondertitel aan de staafdiagram toe
    svg.append("text")
@@ -79,13 +79,13 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
 
   // creëer een infoKnop
   var infoKnop = svg.append("g")
-      .attr("class", "tooltipje")
-      .style("display", "none");
+                    .attr("class", "tooltipje")
+                    .style("display", "none");
 
   // voeg de informatie toe aan de infoKnop
   infoKnop.append("text")
-    .attr("x", 40)
-    .attr("dy", "1.2em");
+          .attr("x", 40)
+          .attr("dy", "1.2em");
 
   vervoer = ["Auto (bestuurder)", "Auto (passagier)", "Trein", "Bus/tram/metro", "Brom-/snorfiets", "Fiets", "Lopen"]
 
@@ -173,11 +173,11 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                 .on("click", function(d) {
                   if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
                     update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
-                    infoKnop3.html(d.data.Vervoerswijze);
+                    infoKnop3.html(" en " + d.data.Vervoerswijze);
                   }
                   else {
                     update(vervoerswijze, provincie, "Totaal", jaar);
-                    infoKnop3.html("Totaal (Geen info over deze vervoerswijze)");}})
+                    infoKnop3.html(" (geen info beschikbaar)");}})
 
   ring.append("path")
       .attr("d", arc)

@@ -3,6 +3,9 @@
   font-weight: bold;
   position: absolute;
   text-anchor: middle;
+  z-index: 1;
+  top: -5px;
+  left: 45%;
 }
 
 .tooltipje2{
@@ -33,6 +36,6 @@
   font-size: 32px;
 }
 
-#section1 {padding-top:50px;height:800px;background-color: LightGray;}
+#section1 {padding-top:50px;height:802px;background-color: LightGray;}
 #section2 {padding-top:50px;height:800px}
-#section3 {padding-top:50px;height:800;background-color: LightGray;}
+#section3 {padding-top:50px;height:585px;background-color: LightGray;}

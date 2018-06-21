@@ -4,11 +4,18 @@
  *
  * Dit script...
  *
+ * Bronnen:
+ * https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
+ * http://d3-legend.susielu.com/
 **/
 function kaart(reizigerskilometers, vervoerswijze, jaar) {
+
   // creëer een infoKnop
   var infoKnop = d3.select("#kaartContainer").append("g")
                    .attr("class", "tooltipje");
+
+  var infoKnop4 = d3.select("#kaartContainer").append("g")
+                    .attr("class", "tooltipje4");
 
   dataReizigers = [];
   for (var i = 0; i < reizigerskilometers.length; i++) {
@@ -38,9 +45,10 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
                 d3.select(this).style("fill", function(d) {
                   return kleur(d.Afstand);});})
               .on("mousemove", function(d) {
-                infoKnop.html("Er in " + d.Provincie + " zijn er " + d.Afstand + " reizigerskilometers <br/>");})
+                infoKnop.html("Er in " + d.Provincie + "<br/>zijn er " + d.Afstand + "<br/> reizigerskilometers <br/>");})
               .on("click", function(d) {
                 d3.selectAll(".tooltipje3").remove()
+                infoKnop4.html("Selectie: " + d.Provincie);
                 updateRingdiagram(reizigerskilometers, vervoerswijze, d.Provincie, jaar);
                 update(vervoerswijze, d.Provincie, "Totaal", jaar);})
 
@@ -65,7 +73,6 @@ function slider(reizigerskilometers, vervoerswijze) {
                  .tickFormat(d3.format(""))
                  .ticks(5)
                  .on("onchange", val => {
-                   console.log(val);
                    d3.select(".tooltipje").remove();
                    kaart(reizigerskilometers, vervoerswijze, val);
                    updateRingdiagram(reizigerskilometers, vervoerswijze, "Nederland", val);
@@ -83,9 +90,9 @@ function slider(reizigerskilometers, vervoerswijze) {
 }
 
 function legenda() {
-  var linear = d3.scaleLinear()
-                .domain([3,38])
-                .range(["rgb(198,219,239)", "rgb(8,81,156)"]);
+  var schaal = d3.scaleLinear()
+                 .domain([3,38])
+                 .range(["rgb(198,219,239)", "rgb(8,81,156)"]);
 
   var g = d3.select("#sliderContainer")
             .append("svg")
@@ -94,11 +101,11 @@ function legenda() {
             .append("g")
             .attr("transform", "translate(30,30)");
 
-  var legendLinear = d3.legendColor()
-                      .shapeWidth(49)
-                      .cells(8)
-                      .orient('horizontal')
-                      .scale(linear);
+  var legenda = d3.legendColor()
+                  .shapeWidth(49)
+                  .cells(8)
+                  .orient('horizontal')
+                  .scale(schaal);
 
-  g.call(legendLinear);
+  g.call(legenda);
 }

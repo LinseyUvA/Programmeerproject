@@ -89,3 +89,8 @@ Linsey Schaap (11036109)
   * Een legenda gemaakt voor de kaart
 * Layout
   * De kleuren van de site aangepast
+
+### Donderdag
+* Layout
+  * De plek waar de visualisaties staan veranderd aan de hand van bootstrap, door de kolom breedte aan te passen.
+  * Een afbeelding gemaakt aan de hand van flaticons voor de site.
