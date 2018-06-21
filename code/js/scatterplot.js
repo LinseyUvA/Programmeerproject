@@ -74,7 +74,7 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
   svg.append("text")
      .attr("class", "titelAs")
      .attr("transform", "rotate(-90)")
-     .attr("y", 40 + marge.rechts)
+     .attr("y", marge.rechts)
      .attr("x", 0 - (hoogte / 2))
      .attr("dy", "1em")
      .text("Reisduur (minuten)");
@@ -145,13 +145,13 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
 
    // creëer een infoKnop
    var infoKnop = svg.append("g")
-       .attr("class", "tooltipje")
-       .style("display", "none");
+                     .attr("class", "tooltipje")
+                     .style("display", "none");
 
    // voeg de informatie toe aan de infoKnop
    infoKnop.append("text")
-     .attr("x", 15)
-     .attr("dy", "1.2em");
+           .attr("x", 15)
+           .attr("dy", "1.2em");
 
    var infoKnop2 = d3.select("#scatterplotContainer").append("g")
                      .attr("class", "tooltipje2");
@@ -189,7 +189,7 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
   d3.selectAll(".tooltipje2").remove()
 
   // marges vast leggen
-  var marge = {boven: 20, beneden: 20, rechts: 20, links: 25};
+  var marge = {boven: 20, beneden: 20, rechts: 20, links: 20};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 
