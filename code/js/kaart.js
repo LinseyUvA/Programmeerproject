@@ -16,6 +16,9 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
   var infoKnop = d3.select("#kaartContainer").append("g")
                    .attr("class", "tooltipje");
 
+  var infoKnop3 = d3.select("#kaartContainer").append("g")
+                    .attr("class", "tooltipje3");
+
   dataReizigers = [];
   for (var i = 0; i < reizigerskilometers.length; i++) {
     if (reizigerskilometers[i].Periode == jaar && reizigerskilometers[i].Vervoerswijze == "Totaal") {
@@ -53,42 +56,6 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
 
 }
 
-function slider(reizigerskilometers, vervoerswijze) {
-  // marges vast leggen
-  var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
-  var grafiekHoogte = hoogte - marge.boven - marge.beneden;
-  var grafiekBreedte = breedte - marge.rechts - marge.links;
-
-  var svg = d3.select("#sliderContainer")
-              .attr("width", grafiekBreedte + marge.links + marge.rechts)
-              .attr("height", grafiekHoogte + marge.boven + marge.beneden);
-
-  slider1 = d3.sliderHorizontal()
-                 .min(2010)
-                 .max(2014)
-                 .step(1)
-                 .width(400)
-                 .tickFormat(d3.format(""))
-                 .ticks(5)
-                 .on("onchange", val => {
-                   d3.select(".tooltipje").remove();
-                   d3.select(".tooltipje3").remove();
-                   kaart(reizigerskilometers, vervoerswijze, val);
-                   updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, val);
-                   update(vervoerswijze, provincie, "Totaal", val);
-                   })
-
-   var g = d3.select("#sliderContainer")
-             .append("svg")
-             .attr("id", "timTest")
-             .attr("width", 600)
-             .attr("height", 65)
-             .append("g")
-             .attr("transform", "translate(30,30)");
-
-   g.call(slider1);
-}
-
 function legenda() {
   var schaal = d3.scaleLinear()
                  .domain([3,38])
@@ -110,8 +77,47 @@ function legenda() {
   g.call(legenda);
 }
 
-function reset(reizigerskilometers, vervoerswijze, middel, jaar) {
+function slider(reizigerskilometers, vervoerswijze) {
+  // marges vast leggen
+  var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
+  var grafiekHoogte = hoogte - marge.boven - marge.beneden;
+  var grafiekBreedte = breedte - marge.rechts - marge.links;
+
+  var svg = d3.select("#sliderContainer")
+              .attr("width", grafiekBreedte + marge.links + marge.rechts)
+              .attr("height", grafiekHoogte + marge.boven + marge.beneden);
+
+  slider1 = d3.sliderHorizontal()
+                 .min(2010)
+                 .max(2014)
+                 .step(1)
+                 .width(400)
+                 .tickFormat(d3.format(""))
+                 .ticks(5)
+                 .on("onchange", val => {
+                   d3.select(".tooltipje").remove();
+                   d3.select(".tooltipje3").html("Selectie: " + provincie);
+                   kaart(reizigerskilometers, vervoerswijze, val);
+                   updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, val);
+                   update(vervoerswijze, provincie, "Totaal", val);
+                   })
+
+   var g = d3.select("#sliderContainer")
+             .append("svg")
+             .attr("id", "timTest")
+             .attr("width", 600)
+             .attr("height", 65)
+             .append("g")
+             .attr("transform", "translate(30,30)");
+
+   g.call(slider1);
+}
+
+function reset(reizigerskilometers, vervoerswijze) {
   provincie = "Nederland";
+  middel = "Totaal";
+  jaar = "2010";
+
   d3.select(".tooltipje").remove();
   d3.select(".tooltipje3").remove();
   slider1.value(2010);

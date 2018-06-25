@@ -89,7 +89,7 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
        dataVervoerswijze[i]["bucketKleur"] = "rgb(89, 140, 192)";
      }
      if (tijden.includes(dataVervoerswijze[i].Verplaatsing)) {
-       dataVervoerswijze[i]["bucketKleur"] = "rgb(251, 106, 74)";
+       dataVervoerswijze[i]["bucketKleur"] = "#79CF6E";
      }
    }
 
@@ -135,11 +135,12 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
          waarde = this.value.slice(2).replace(/\s+/g, '');}
        else {
          waarde = this.value;}
+       console.log(waarde);
        d3.select("#" + waarde)
-         .attr("r", 10);})
+         .style("r", 10);})
      .on("mouseout", function() {
        d3.selectAll("circle")
-         .attr("r", 5)})
+         .style("r", 5)})
      .on("change", function() {
        update(vervoerswijze, provincie, "Totaal", jaar)})
 
@@ -252,7 +253,7 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
       dataVervoer[i]["bucketKleur"] = "rgb(89, 140, 192)";
     }
     if (tijden.includes(dataVervoer[i].Verplaatsing)) {
-      dataVervoer[i]["bucketKleur"] = "rgb(251, 106, 74)";
+      dataVervoer[i]["bucketKleur"] = "#79CF6E";
     }
   }
 
@@ -302,10 +303,10 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
       else {
         waarde = this.value;}
       d3.select("#" + waarde)
-        .attr("r", 10);})
+        .style("r", 10);})
     .on("mouseout", function() {
       d3.selectAll("circle")
-        .attr("r", 5)})
+        .style("r", 5)})
 
   // creëer een infoKnop
   var infoKnop = svg.append("g")

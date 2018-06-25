@@ -28,7 +28,7 @@ window.onload = function() {
     var vervoerswijze = response["1"]["data"];
 
     document.getElementById("kaartContainer").appendChild(response[2].documentElement);
-    document.getElementById("knop").onclick = function() {reset(reizigerskilometers, vervoerswijze, "Totaal", "2010")};
+    document.getElementById("knop").onclick = function() {reset(reizigerskilometers, vervoerswijze)};
 
     slider(reizigerskilometers, vervoerswijze);
     legenda();

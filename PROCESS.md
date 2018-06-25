@@ -103,9 +103,10 @@ Linsey Schaap (11036109)
 ### Maandag
 * Reset
   * De knop zet nu alle vinkjes weer aan
-  * Alle tooltips aan nu ook uit bij het klikken op de knop
-  * Wanneer er een provincie was aangeklikt gaat hij bij het gebruik van de slider weer over op de laatst aangeklikte provincie (fout)
+  * Alle tooltips gaan nu ook uit bij het klikken op de knop
+  * Wanneer er een provincie was aangeklikt gaat hij bij het gebruik van de slider weer over op de laatst aangeklikte provincie (fout) later vandaag heb ik provincie globaal gemaakt zodat dit probleem kon worden opgelost.
 * Slider
   * De juiste provincie wordt meegegeven aan de slider waardoor de slider werkt voor de aangeklikte provincie.
 * Checkbox
   * De laatste twee vinkjes kunnen niet uit nu ipv alleen de laatste.
+  * Nadat de hover over een bolletje in de scatter is gebruikt wordt het bolletje niet meer vergroot wanneer er over een box in de checkbox wordt gehoverd. Dit kwam doordat ik de r op verschillende manier aanpaste. Een keer met attr en een keer met style. Nu is dit opgelost.
