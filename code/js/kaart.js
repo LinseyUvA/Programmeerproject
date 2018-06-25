@@ -16,9 +16,6 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
   var infoKnop = d3.select("#kaartContainer").append("g")
                    .attr("class", "tooltipje");
 
-  var infoKnop4 = d3.select("#kaartContainer").append("g")
-                    .attr("class", "tooltipje4");
-
   dataReizigers = [];
   for (var i = 0; i < reizigerskilometers.length; i++) {
     if (reizigerskilometers[i].Periode == jaar && reizigerskilometers[i].Vervoerswijze == "Totaal") {
@@ -49,10 +46,10 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
               .on("mousemove", function(d) {
                 infoKnop.html("Er in " + d.Provincie + "<br/>zijn er " + d.Afstand + "<br/> reizigerskilometers <br/>");})
               .on("click", function(d) {
-                d3.select(".tooltipje3").remove();
-                d3.select(".tooltipje4").html("Selectie: " + d.Provincie);
-                updateRingdiagram(reizigerskilometers, vervoerswijze, d.Provincie, jaar);
-                update(vervoerswijze, d.Provincie, "Totaal", jaar);})
+                provincie = d.Provincie
+                d3.select(".tooltipje3").html("Selectie: " + provincie);
+                updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar);
+                update(vervoerswijze, provincie, "Totaal", jaar);})
 
 }
 
@@ -75,9 +72,10 @@ function slider(reizigerskilometers, vervoerswijze) {
                  .ticks(5)
                  .on("onchange", val => {
                    d3.select(".tooltipje").remove();
+                   d3.select(".tooltipje3").remove();
                    kaart(reizigerskilometers, vervoerswijze, val);
-                   updateRingdiagram(reizigerskilometers, vervoerswijze, "Nederland", val);
-                   update(vervoerswijze, "Nederland", "Totaal", val);
+                   updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, val);
+                   update(vervoerswijze, provincie, "Totaal", val);
                    })
 
    var g = d3.select("#sliderContainer")
@@ -112,10 +110,10 @@ function legenda() {
   g.call(legenda);
 }
 
-function reset(reizigerskilometers, vervoerswijze, provincie, middel, jaar) {
+function reset(reizigerskilometers, vervoerswijze, middel, jaar) {
+  provincie = "Nederland";
   d3.select(".tooltipje").remove();
   d3.select(".tooltipje3").remove();
-  d3.select(".tooltipje4").remove();
   slider1.value(2010);
 
   d3.selectAll(".myCheckbox")

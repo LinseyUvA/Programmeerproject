@@ -10,6 +10,7 @@
 // stel hoogte en breedte vast
 var hoogte = 300;
 var breedte = 500;
+var provincie = "Nederland";
 
 window.onload = function() {
 
@@ -25,9 +26,9 @@ window.onload = function() {
     // data opslaan
     var reizigerskilometers = response["0"]["data"];
     var vervoerswijze = response["1"]["data"];
-    
+
     document.getElementById("kaartContainer").appendChild(response[2].documentElement);
-    document.getElementById("knop").onclick = function() {reset(reizigerskilometers, vervoerswijze, "Nederland", "Totaal", "2010")};
+    document.getElementById("knop").onclick = function() {reset(reizigerskilometers, vervoerswijze, "Totaal", "2010")};
 
     slider(reizigerskilometers, vervoerswijze);
     legenda();

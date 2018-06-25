@@ -64,12 +64,22 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                          infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
                          infoKnop.select("text").text(d.data.Afstand + " km");})
                        .on("click", function(d) {
-                         if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
-                           update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
-                           infoKnop3.html(d.data.Vervoerswijze);}
-                         else {
-                           update(vervoerswijze, provincie, "Totaal", jaar);
-                           infoKnop3.html("Totaal (Geen info over deze vervoerswijze)");}})
+                         if (".tooltipje4") {
+                           if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
+                             update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
+                             infoKnop3.html("Selectie: " + d.data.Vervoerswijze);}
+                           else {
+                             update(vervoerswijze, provincie, "Totaal", jaar);
+                             infoKnop3.html("Selectie: Totaal (Geen info over deze vervoerswijze)");}
+                         }
+                         else{
+                           if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
+                             update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
+                             infoKnop3.html(d.data.Vervoerswijze);}
+                           else {
+                             update(vervoerswijze, provincie, "Totaal", jaar);
+                             infoKnop3.html("Totaal (Geen info over deze vervoerswijze)");}
+                         }})
 
   ring.append("path")
       .attr("d", arc)
@@ -174,13 +184,18 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                   infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
                   infoKnop.select("text").text(d.data.Afstand + " km");})
                 .on("click", function(d) {
-                  if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
-                    update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
-                    infoKnop3.html(" en " + d.data.Vervoerswijze);
+                  if (provincie == "Nederland") {
+                    infoKnop3.html("Selectie: " + d.data.Vervoerswijze)
                   }
-                  else {
-                    update(vervoerswijze, provincie, "Totaal", jaar);
-                    infoKnop3.html(" (geen info beschikbaar)");}})
+                  else{
+                    if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
+                      update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
+                      infoKnop3.html(" en " + d.data.Vervoerswijze);
+                    }
+                    else {
+                      update(vervoerswijze, provincie, "Totaal", jaar);
+                      infoKnop3.html(" en Totaal (geen info beschikbaar)");}
+                  }})
 
   ring.append("path")
       .attr("d", arc)

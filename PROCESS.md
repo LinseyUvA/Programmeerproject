@@ -98,3 +98,14 @@ Linsey Schaap (11036109)
   * De slider update naar Nederland, maar zou dat eigenlijk niet moeten doen, maar de laatst aangeklikte provincie laten zien.
 * Reset knop gemaakt
   * De knop zet alles terug naar Nederland en 2010, maar zet niet alle vinkjes weer aan (morgen vragen of dat zou moeten)
+
+## Week 4
+### Maandag
+* Reset
+  * De knop zet nu alle vinkjes weer aan
+  * Alle tooltips aan nu ook uit bij het klikken op de knop
+  * Wanneer er een provincie was aangeklikt gaat hij bij het gebruik van de slider weer over op de laatst aangeklikte provincie (fout)
+* Slider
+  * De juiste provincie wordt meegegeven aan de slider waardoor de slider werkt voor de aangeklikte provincie.
+* Checkbox
+  * De laatste twee vinkjes kunnen niet uit nu ipv alleen de laatste.

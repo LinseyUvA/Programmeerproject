@@ -173,7 +173,7 @@ function update(dataVervoerswijze, provincie, middel, jaar){
       newData = data.filter(function(d,i){return choices.includes(d);});
     })
   }
-  if (choices.length == 1) {
+  if (choices.length == 2) {
     d3.selectAll(".myCheckbox").each(function(d) {
       cb = d3.select(this)
       if (cb.property("checked")){
