@@ -117,6 +117,10 @@ function reset(reizigerskilometers, vervoerswijze, provincie, middel, jaar) {
   d3.select(".tooltipje3").remove();
   d3.select(".tooltipje4").remove();
   slider1.value(2010);
+
+  d3.selectAll(".myCheckbox")
+    .property("checked", true)
+
   kaart(reizigerskilometers, vervoerswijze, jaar);
   updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar);
   update(vervoerswijze, provincie, middel, jaar);

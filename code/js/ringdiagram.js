@@ -26,6 +26,9 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
 
   var kleur = d3.scaleOrdinal()
                 .range(["rgb(251,106,74)","rgb(252,146,114)","rgb(252,187,161)","rgb(254,224,210)","rgb(153,0,13)","rgb(203,24,29)","rgb(239,59,44)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
+                // .range(["#1C2454","#443399","#5C57C7","#6A81CD","#6EC6CF","#73D071","#ADDB94","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
+                // .range(["#6F254F","#AC397A","#D279C1","#C2A3E0","BAE8DF","#E4D7AF","#D08E71","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
+
 
   var pie = d3.pie()
               .value(function(d){return d.Afstand})
