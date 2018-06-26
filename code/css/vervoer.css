@@ -36,6 +36,15 @@
   font-size: 32px;
 }
 
-#section1 {padding-top:50px;height:802px;background-color: LightGray;}
+p{
+  font-size: 18px;
+}
+
+ul{
+  font-size: 18px;
+  list-style-type: circle;
+}
+
+#section1 {padding-top:50px;height:1032px;background-color: LightGray;}
 #section2 {padding-top:50px;height:800px}
 #section3 {padding-top:50px;height:585px;background-color: LightGray;}

@@ -90,6 +90,9 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
           .attr("x", 40)
           .attr("dy", "1.2em");
 
+  var infoKnop3 = d3.select("#kaartContainer").append("g")
+                    .attr("class", "tooltipje3");
+
   vervoer = ["Auto (bestuurder)", "Auto (passagier)", "Trein", "Bus/tram/metro", "Brom-/snorfiets", "Fiets", "Lopen"]
 
   // maak legenda voor de kleuren
