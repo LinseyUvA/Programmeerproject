@@ -110,3 +110,7 @@ Linsey Schaap (11036109)
 * Checkbox
   * De laatste twee vinkjes kunnen niet uit nu ipv alleen de laatste.
   * Nadat de hover over een bolletje in de scatter is gebruikt wordt het bolletje niet meer vergroot wanneer er over een box in de checkbox wordt gehoverd. Dit kwam doordat ik de r op verschillende manier aanpaste. Een keer met attr en een keer met style. Nu is dit opgelost.
+
+### Dinsdag
+* md
+  * Proposal.md aangemaakt 

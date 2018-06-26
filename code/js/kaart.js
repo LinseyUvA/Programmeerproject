@@ -71,7 +71,7 @@ function legenda() {
   var legenda = d3.legendColor()
                   .shapeWidth(49)
                   .cells(8)
-                  .orient('horizontal')
+                  .orient("horizontal")
                   .scale(schaal);
 
   g.call(legenda);
@@ -83,7 +83,7 @@ function slider(reizigerskilometers, vervoerswijze) {
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 
-  var svg = d3.select("#sliderContainer")
+  var svg = d3.select("#sliderContaine")
               .attr("width", grafiekBreedte + marge.links + marge.rechts)
               .attr("height", grafiekHoogte + marge.boven + marge.beneden);
 
