@@ -113,4 +113,9 @@ Linsey Schaap (11036109)
 
 ### Dinsdag
 * md
-  * Proposal.md aangemaakt 
+  * Proposal.md aangemaakt
+  * Frame van Report.md opgeschreven
+* Site
+  * De tekst bij home geschreven
+* Ringdiagram
+  * Bug eruit gehaald. Hij liet niet altijd de tooltip zien.
