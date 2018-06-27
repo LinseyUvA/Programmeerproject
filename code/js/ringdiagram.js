@@ -71,6 +71,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                     alert("Geen informatie over deze vervoerswijze beschikbaar")
                     infoKnopSelectie.html("Selectie: " + provincie + " en Totaal ");};});
 
+  // voeg onderdelen van ringdiagram toe
   ring.append("path")
       .attr("d", hoek)
       .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)});
@@ -189,6 +190,7 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                     d3.select(".tooltipje3").html("Selectie: " + provincie + " en Totaal ");}
                   })
 
+  // voeg onderdelen van ringdiagram toe
   ring.append("path")
       .attr("d", hoek)
       .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)})

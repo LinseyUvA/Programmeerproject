@@ -58,7 +58,7 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
                 provincie = d.Provincie;
                 d3.select(".tooltipje3").html("Selectie: " + provincie);
                 updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar);
-                checkbox(vervoerswijze, provincie, "Totaal", jaar);})
+                checkbox(vervoerswijze, provincie, "Totaal", jaar);});
 };
 
 // maak een legenda aan voor de kaart
@@ -126,7 +126,7 @@ function slider(reizigerskilometers, vervoerswijze) {
    g.call(sliderJaren);
 };
 
-// funcie die alle waarden terug zet naar 2010 en Nederland
+// funcie die alle waarden terug zet naar 2010, Nederland en totaal
 function reset(reizigerskilometers, vervoerswijze) {
 
   // zet alle waarden terug
