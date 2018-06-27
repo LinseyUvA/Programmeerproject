@@ -4,18 +4,21 @@
  *
  * Dit script...
  *
+ * Bronnen:
+ * https://bl.ocks.org/mbostock/3887193
 **/
 
+// functie die de ringdiagram maakt
 function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
 
-  // marges vast leggen
+  // marges, straal en hoek vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
   var straal = grafiekBreedte / 2;
-  var arc = d3.arc()
-              .outerRadius(straal - 10)
-              .innerRadius(straal - 50);
+  var hoek = d3.arc()
+               .outerRadius(straal - 10)
+               .innerRadius(straal - 50);
 
   // filter voor de juiste data
   dataReizigers = reizigerskilometers.filter(function(d,i) {
@@ -26,12 +29,12 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
   var kleur = d3.scaleOrdinal()
                 .range(["#B14FC4","#A990DA","#718ED0","#81D5CB","#79CF6E","#448E2F","#2A7E53"])
 
-
+  // bepaal de volgorde van de onderdelen in de diagram
   var pie = d3.pie()
               .value(function(d){return d.Afstand})
               .sort(null);
 
-  // creëer een format voor een afbeelding
+  // maak een SVG element
   var svg = d3.select("#ringdiagramContainer")
               .append("svg")
               .attr("class", "diagram")
@@ -40,6 +43,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .append("g")
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
 
+  // creëer de ringdiagram
   var ring = svg.selectAll("arc")
                 .data(pie(dataReizigers))
                 .enter()
@@ -60,16 +64,15 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                   infoKnopRing.select("text").text(d.data.Afstand + " km");})
                 .on("click", function(d) {
                   if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
-                    update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
+                    checkbox(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
                     infoKnopSelectie.html("Selectie: " + provincie + " en " + d.data.Vervoerswijze);}
                   else {
-                    update(vervoerswijze, provincie, "Totaal", jaar);
+                    checkbox(vervoerswijze, provincie, "Totaal", jaar);
                     alert("Geen informatie over deze vervoerswijze beschikbaar")
-                    infoKnopSelectie.html("Selectie: " + provincie + " en Totaal ");}
-                  })
+                    infoKnopSelectie.html("Selectie: " + provincie + " en Totaal ");};});
 
   ring.append("path")
-      .attr("d", arc)
+      .attr("d", hoek)
       .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)});
 
    // voeg een ondertitel aan de staafdiagram toe
@@ -77,7 +80,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
       .attr("class", "ondertitel")
       .text(provincie);
 
-  // creëer een infoKnop voor extra info over onderdeel ring
+  // creëer een infoKnop voor extra info over ring
   var infoKnopRing = svg.append("g")
                         .attr("class", "tooltipje")
                         .style("display", "none");
@@ -121,24 +124,26 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
          .attr("dy", ".35em")
          .text(function(d,i) {
            return vervoer[i]})
-}
+};
 
+// functie voor het updaten van de ringdiagram
 function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
-  // marges vast leggen
+
+  // marges, straal en hoek vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
   var straal = grafiekBreedte / 2;
-  var arc = d3.arc()
-              .outerRadius(straal - 10)
-              .innerRadius(straal - 50);
+  var hoek = d3.arc()
+               .outerRadius(straal - 10)
+               .innerRadius(straal - 50);
 
   // filter voor de juiste data
   dataReizigers = reizigerskilometers.filter(function(d,i) {
     return (d.Periode == jaar && d.Provincie == provincie && d.Vervoerswijze != "Totaal");
   });
 
-  // selecteer het figuur waar aanpassingen aan gedaan worden
+  // selecteer SVG element waar aanpassingen aan gedaan worden
   var svg = d3.select("#ringdiagramContainer")
               .select(".diagram")
               .attr("height", hoogte)
@@ -150,10 +155,12 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
   var kleur = d3.scaleOrdinal()
                 .range(["#B14FC4","#A990DA","#718ED0","#81D5CB","#79CF6E","#448E2F","#2A7E53"])
 
+  // bepaal de volgorde van de onderdelen in de diagram
   var pie = d3.pie()
               .value(function(d){return d.Afstand})
               .sort(null);
 
+  // update de ringen
   var ring = svg.selectAll(".arc")
                 .data(pie(dataReizigers))
                 .enter()
@@ -174,25 +181,25 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                   infoKnopRing.select("text").text(d.data.Afstand + " km");})
                 .on("click", function(d) {
                   if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
-                    update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
+                    checkbox(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
                     d3.select(".tooltipje3").html("Selectie: " + provincie + " en " + d.data.Vervoerswijze);}
                   else {
-                    update(vervoerswijze, provincie, "Totaal", jaar);
+                    checkbox(vervoerswijze, provincie, "Totaal", jaar);
                     alert("Geen informatie over deze vervoerswijze beschikbaar")
                     d3.select(".tooltipje3").html("Selectie: " + provincie + " en Totaal ");}
                   })
 
   ring.append("path")
-      .attr("d", arc)
+      .attr("d", hoek)
       .attr("fill", function(d) {return kleur(d.data.Vervoerswijze)})
       .transition()
       .duration(1500);
 
-   // voeg een ondertitel aan de staafdiagram toe
-   d3.select(".ondertitel")
-     .text(provincie);
+  // voeg een ondertitel aan de staafdiagram toe
+  d3.select(".ondertitel")
+    .text(provincie);
 
-  // creëer een infoKnop
+  // creëer een infoKnop met extra info over ring
   var infoKnopRing = svg.append("g")
                         .attr("class", "tooltipje")
                         .style("display", "none");
@@ -205,4 +212,4 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
   // creëer een infoKnop om aan te geven waar op wordt geselecteerd
   var infoKnopSelectie = d3.select("#kaartContainer").append("g")
                            .attr("class", "tooltipje3");
-}
+};
