@@ -17,18 +17,14 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .outerRadius(straal - 10)
               .innerRadius(straal - 50);
 
-  dataReizigers = [];
-  for (var i = 0; i < reizigerskilometers.length; i++) {
-    if (reizigerskilometers[i].Periode == jaar && reizigerskilometers[i].Provincie == provincie && reizigerskilometers[i].Vervoerswijze != "Totaal") {
-      dataReizigers.push(reizigerskilometers[i]);
-    };
-  };
+  // filter voor de juiste data
+  dataReizigers = reizigerskilometers.filter(function(d,i) {
+    return (d.Periode == jaar && d.Provincie == provincie && d.Vervoerswijze != "Totaal");
+  });
 
+  // maak een kleurschema
   var kleur = d3.scaleOrdinal()
-                // .range(["rgb(251,106,74)","rgb(252,146,114)","rgb(252,187,161)","rgb(254,224,210)","rgb(153,0,13)","rgb(203,24,29)","rgb(239,59,44)","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
-                // .range(["#1C2454","#443399","#5C57C7","#6A81CD","#6EC6CF","#73D071","#ADDB94","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
-                // .range(["#6F254F","#AC397A","#D279C1","#C2A3E0","BAE8DF","#E4D7AF","#D08E71","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
-                .range(["#B14FC4","#A990DA","#718ED0","#81D5CB","#79CF6E","#448E2F","#2A7E53","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
+                .range(["#B14FC4","#A990DA","#718ED0","#81D5CB","#79CF6E","#448E2F","#2A7E53"])
 
 
   var pie = d3.pie()
@@ -45,31 +41,32 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
 
   var ring = svg.selectAll("arc")
-                       .data(pie(dataReizigers))
-                       .enter()
-                       .append("g")
-                       .attr("class", "arc")
-                       // maak de staven interactief
-                       .on("mouseover", function() {
-                         infoKnop.style("display", null);
-                         d3.select(this).style("stroke", "Black");})
-                       .on("mouseout", function() {
-                         infoKnop.style("display", "none");
-                         d3.select(this).style("stroke", null);})
-                       .on("mousemove", function(d) {
-                         var xPos = d3.mouse(this)[0] - marge.rechts;
-                         var yPos = d3.mouse(this)[1] - marge.beneden;
-                         infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                         infoKnop.select("text").text(d.data.Afstand + " km");})
-                       .on("click", function(d) {
-                         if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
-                           update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
-                           infoKnop3.html("Selectie: " + provincie + " en " + d.data.Vervoerswijze);}
-                         else {
-                           update(vervoerswijze, provincie, "Totaal", jaar);
-                           alert("Geen informatie over deze vervoerswijze beschikbaar")
-                           infoKnop3.html("Selectie: " + provincie + " en Totaal ");}
-                         })
+                .data(pie(dataReizigers))
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+
+                // maak de ringen interactief
+                .on("mouseover", function() {
+                  infoKnopRing.style("display", null);
+                  d3.select(this).style("stroke", "Black");})
+                .on("mouseout", function() {
+                  infoKnopRing.style("display", "none");
+                  d3.select(this).style("stroke", null);})
+                .on("mousemove", function(d) {
+                  var xPos = d3.mouse(this)[0] - marge.rechts;
+                  var yPos = d3.mouse(this)[1] - marge.beneden;
+                  infoKnopRing.attr("transform", "translate(" + xPos + "," + yPos + ")")
+                  infoKnopRing.select("text").text(d.data.Afstand + " km");})
+                .on("click", function(d) {
+                  if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
+                    update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
+                    infoKnopSelectie.html("Selectie: " + provincie + " en " + d.data.Vervoerswijze);}
+                  else {
+                    update(vervoerswijze, provincie, "Totaal", jaar);
+                    alert("Geen informatie over deze vervoerswijze beschikbaar")
+                    infoKnopSelectie.html("Selectie: " + provincie + " en Totaal ");}
+                  })
 
   ring.append("path")
       .attr("d", arc)
@@ -81,19 +78,21 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
       .text(provincie);
 
   // creëer een infoKnop
-  var infoKnop = svg.append("g")
-                    .attr("class", "tooltipje")
-                    .style("display", "none");
+  var infoKnopRing = svg.append("g")
+                        .attr("class", "tooltipje")
+                        .style("display", "none");
 
   // voeg de informatie toe aan de infoKnop
-  infoKnop.append("text")
-          .attr("x", 40)
-          .attr("dy", "1.2em");
+  infoKnopRing.append("text")
+              .attr("x", 40)
+              .attr("dy", "1.2em");
 
-  var infoKnop3 = d3.select("#kaartContainer").append("g")
-                    .attr("class", "tooltipje3");
+  var infoKnopSelectie = d3.select("#kaartContainer").append("g")
+                           .attr("class", "tooltipje3");
 
-  vervoer = ["Auto (bestuurder)", "Auto (passagier)", "Trein", "Bus/tram/metro", "Brom-/snorfiets", "Fiets", "Lopen"]
+  // tekst voor de legenda opstellen
+  vervoer = ["Auto (bestuurder)", "Auto (passagier)", "Trein", "Bus/tram/metro",
+             "Brom-/snorfiets", "Fiets", "Lopen"]
 
   // maak legenda voor de kleuren
   var legenda = svg.append("g")
@@ -133,13 +132,10 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .outerRadius(straal - 10)
               .innerRadius(straal - 50);
 
-  dataReizigers = [];
-  for (var i = 0; i < reizigerskilometers.length; i++) {
-    if (reizigerskilometers[i].Periode == jaar && reizigerskilometers[i].Provincie == provincie && reizigerskilometers[i].Vervoerswijze != "Totaal") {
-      dataReizigers.push(reizigerskilometers[i]);
-    };
-  };
-  d3.selectAll(".arc").remove();
+  // filter voor de juiste data
+  dataReizigers = reizigerskilometers.filter(function(d,i) {
+    return (d.Periode == jaar && d.Provincie == provincie && d.Vervoerswijze != "Totaal");
+  });
 
   // selecteer het figuur waar aanpassingen aan gedaan worden
   var svg = d3.select("#ringdiagramContainer")
@@ -149,11 +145,12 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .append("g")
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
 
-  var infoKnop3 = d3.select("#kaartContainer").append("g")
-                    .attr("class", "tooltipje3");
+  var infoKnopSelectie = d3.select("#kaartContainer").append("g")
+                           .attr("class", "tooltipje3");
 
+  // maak een kleurschema
   var kleur = d3.scaleOrdinal()
-                .range(["#B14FC4","#A990DA","#718ED0","#81D5CB","#79CF6E","#448E2F","#2A7E53","rgb(217,217,217)","rgb(188,128,189)","rgb(204,235,197)","rgb(255,237,111)"])
+                .range(["#B14FC4","#A990DA","#718ED0","#81D5CB","#79CF6E","#448E2F","#2A7E53"])
 
   var pie = d3.pie()
               .value(function(d){return d.Afstand})
@@ -164,20 +161,20 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
                 .enter()
                 .append("g")
                 .attr("class", "arc")
-                // maak de staven interactief
+
+                // maak de ringen interactief
                 .on("mouseover", function() {
-                  infoKnop.style("display", null);
+                  infoKnopRing.style("display", null);
                   d3.select(this).style("stroke", "Black");})
                 .on("mouseout", function() {
-                  infoKnop.style("display", "none");
+                  infoKnopRing.style("display", "none");
                   d3.select(this).style("stroke", null);})
                 .on("mousemove", function(d) {
                   var xPos = d3.mouse(this)[0] - marge.rechts;
                   var yPos = d3.mouse(this)[1] - marge.beneden;
-                  infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-                  infoKnop.select("text").text(d.data.Afstand + " km");})
+                  infoKnopRing.attr("transform", "translate(" + xPos + "," + yPos + ")")
+                  infoKnopRing.select("text").text(d.data.Afstand + " km");})
                 .on("click", function(d) {
-                  // d3.select(".tooltipje3").remove();
                   if (["Auto (bestuurder)", "Auto (passagier)", "Fiets", "Lopen"].includes(d.data.Vervoerswijze)) {
                     update(vervoerswijze, provincie, d.data.Vervoerswijze, jaar);
                     d3.select(".tooltipje3").html("Selectie: " + provincie + " en " + d.data.Vervoerswijze);}
@@ -198,12 +195,12 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
      .text(provincie);
 
   // creëer een infoKnop
-  var infoKnop = svg.append("g")
-                    .attr("class", "tooltipje")
-                    .style("display", "none");
+  var infoKnopRing = svg.append("g")
+                        .attr("class", "tooltipje")
+                        .style("display", "none");
 
   // voeg de informatie toe aan de infoKnop
-  infoKnop.append("text")
-          .attr("x", 40)
-          .attr("dy", "1.2em");
+  infoKnopRing.append("text")
+              .attr("x", 40)
+              .attr("dy", "1.2em");
 }

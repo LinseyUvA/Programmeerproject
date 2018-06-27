@@ -13,19 +13,18 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 
-  var dataVervoerswijze = []
-  for (var i = 0; i < vervoerswijze.length; i++) {
-    if (vervoerswijze[i].Periode == jaar && vervoerswijze[i].Provincie == provincie && vervoerswijze[i].Vervoerswijze == "Totaal") {
-      dataVervoerswijze.push(vervoerswijze[i]);
-    };
-  };
+  // filter voor de juiste data
+  dataVervoerswijze = vervoerswijze.filter(function(d,i) {
+    return (d.Periode == jaar && d.Provincie == provincie && d.Vervoerswijze == "Totaal");
+  });
+
   // maak een SVG element
   var svg = d3.select("#scatterplotContainer")
               .append("svg")
               .attr("height", hoogte)
               .attr("width", breedte);
 
-
+  // lees de data als getallen
   dataVervoerswijze.forEach(function(d) {
     d["Reisduur"] = parseFloat(d["Reisduur"]);
     d["Afstand"] = parseInt(d["Afstand"]);
@@ -111,31 +110,31 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
      .attr("fill", function(d) {
        return d["bucketKleur"];})
      .attr("stroke", "Black")
+
+     // maak de datapunten interactief
      .on("mouseover", function() {
-       infoKnop.style("display", null);
+       infoKnopScatter.style("display", null);
        d3.select(this).style("r", 10);})
      .on("mouseout", function() {
-       infoKnop.style("display", "none");
+       infoKnopScatter.style("display", "none");
        d3.select(this).style("r", 5)})
      .on("mousemove", function(d) {
        var xPos = d3.mouse(this)[0] - marge.rechts;
        var yPos = d3.mouse(this)[1] - marge.beneden;
-       infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-       infoKnop.select("text").text(d.Verplaatsing);})
+       infoKnopScatter.attr("transform", "translate(" + xPos + "," + yPos + ")")
+       infoKnopScatter.select("text").text(d.Verplaatsing);})
      .on("click", function(d) {
-       infoKnop2.html("<br/>Er wordt in " + d.Provincie + " op " + d.Verplaatsing + " " + d.Afstand + " km afgelegd in " + d.Reisduur + " minuten<br/>");});
-
-   data = ["maandag","dinsdag","woensdag","donderdag","vrijdag", "7 tot 9 uur", "9 tot 12 uur", "12 tot 16 uur", "16 tot 18 uur", "18 tot 24 uur"];
-   waarde = 0
+       infoKnopScatterSelectie.html("<br/>Er wordt in " + d.Provincie + " op "
+                                    + d.Verplaatsing + " " + d.Afstand + " km afgelegd in "
+                                    + d.Reisduur + " minuten<br/>");});
 
    d3.selectAll(".myCheckbox")
      .property("checked", true)
      .on("mouseover", function() {
        if (parseInt(this.value[0])){
-         waarde = this.value.slice(2).replace(/\s+/g, '');}
+         var waarde = this.value.slice(2).replace(/\s+/g, '');}
        else {
-         waarde = this.value;}
-       console.log(waarde);
+         var waarde = this.value;}
        d3.select("#" + waarde)
          .style("r", 10);})
      .on("mouseout", function() {
@@ -145,17 +144,17 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
        update(vervoerswijze, provincie, "Totaal", jaar)})
 
    // creëer een infoKnop
-   var infoKnop = svg.append("g")
-                     .attr("class", "tooltipje")
-                     .style("display", "none");
+   var infoKnopScatter = svg.append("g")
+                            .attr("class", "tooltipje")
+                            .style("display", "none");
 
    // voeg de informatie toe aan de infoKnop
-   infoKnop.append("text")
-           .attr("x", 15)
-           .attr("dy", "1.2em");
+   infoKnopScatter.append("text")
+                  .attr("x", 15)
+                  .attr("dy", "1.2em");
 
-   var infoKnop2 = d3.select("#scatterplotContainer").append("g")
-                     .attr("class", "tooltipje2");
+   var infoKnopScatterSelectie = d3.select("#scatterplotContainer").append("g")
+                                   .attr("class", "tooltipje2");
 }
 
 function update(dataVervoerswijze, provincie, middel, jaar){
@@ -166,6 +165,11 @@ function update(dataVervoerswijze, provincie, middel, jaar){
       choices.push(cb.property("value"));
     }
   });
+
+  data = ["maandag","dinsdag","woensdag","donderdag","vrijdag", "7 tot 9 uur",
+          "9 tot 12 uur", "12 tot 16 uur", "16 tot 18 uur", "18 tot 24 uur"];
+
+  console.log(data)
 
   if(choices.length > 0){
     d3.selectAll(".myCheckbox").each(function(d) {
@@ -194,8 +198,10 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 
+  // filter voor de juiste data
   dataVervoer = vervoerswijze.filter(function(d,i) {
-    return (d.Periode == jaar && d.Provincie == provincie && d.Vervoerswijze == middel && dataFilter.includes(d.Verplaatsing));
+    return (d.Periode == jaar && d.Provincie == provincie && d.Vervoerswijze == middel
+      && dataFilter.includes(d.Verplaatsing));
   })
 
   // maak een SVG element
@@ -204,6 +210,7 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
               .attr("height", hoogte)
               .attr("width", breedte);
 
+  // lees de data als getallen
   dataVervoer.forEach(function(d) {
     d["Reisduur"] = parseFloat(d["Reisduur"]);
     d["Afstand"] = parseInt(d["Afstand"]);
@@ -280,28 +287,30 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
             return d.Verplaatsing.slice(2).replace(/\s+/g, '');}
           return d.Verplaatsing})
 
+  // maak de datapunten interactief
   d3.selectAll("circle")
     .on("mouseover", function() {
-      infoKnop.style("display", null);
+      infoKnopScatter.style("display", null);
       d3.select(this).style("r", 10);})
     .on("mouseout", function() {
-      infoKnop.style("display", "none");
+      infoKnopScatter.style("display", "none");
       d3.select(this).style("r", 5)})
     .on("mousemove", function(d) {
         var xPos = d3.mouse(this)[0] - marge.rechts;
         var yPos = d3.mouse(this)[1] - marge.beneden;
-        infoKnop.attr("transform", "translate(" + xPos + "," + yPos + ")")
-        infoKnop.select("text").text(d.Verplaatsing);})
+        infoKnopScatter.attr("transform", "translate(" + xPos + "," + yPos + ")")
+        infoKnopScatter.select("text").text(d.Verplaatsing);})
     .on("click", function(d) {
-      infoKnop2.html("<br/>Er wordt in " + d.Provincie + " op " + d.Verplaatsing + " " + d.Afstand + " km afgelegd in " + d.Reisduur + " minuten<br/>");});
-
+      infoKnopScatterSelectie.html("<br/>Er wordt in " + d.Provincie + " op "
+                                   + d.Verplaatsing + " " + d.Afstand + " km afgelegd in "
+                                   + d.Reisduur + " minuten<br/>");});
 
   d3.selectAll(".myCheckbox")
     .on("mouseover", function() {
       if (parseInt(this.value[0])){
-        waarde = this.value.slice(2).replace(/\s+/g, '');}
+        var waarde = this.value.slice(2).replace(/\s+/g, '');}
       else {
-        waarde = this.value;}
+        var waarde = this.value;}
       d3.select("#" + waarde)
         .style("r", 10);})
     .on("mouseout", function() {
@@ -309,16 +318,16 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
         .style("r", 5)})
 
   // creëer een infoKnop
-  var infoKnop = svg.append("g")
-      .attr("class", "tooltipje")
-      .style("display", "none");
+  var infoKnopScatter = svg.append("g")
+                           .attr("class", "tooltipje")
+                           .style("display", "none");
 
   // voeg de informatie toe aan de infoKnop
-  infoKnop.append("text")
-    .attr("x", 15)
-    .attr("dy", "1.2em");
+  infoKnopScatter.append("text")
+                 .attr("x", 15)
+                 .attr("dy", "1.2em");
 
-  var infoKnop2 = d3.select("#scatterplotContainer").append("g")
-                    .attr("class", "tooltipje2");
+  var infoKnopScatterSelectie = d3.select("#scatterplotContainer").append("g")
+                                  .attr("class", "tooltipje2");
 
 }

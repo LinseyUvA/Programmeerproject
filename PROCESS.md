@@ -119,3 +119,9 @@ Linsey Schaap (11036109)
   * De tekst bij home geschreven
 * Ringdiagram
   * Bug eruit gehaald. Hij liet niet altijd de tooltip zien.
+
+### Woensdag
+* files
+  * Bij alle functies heb ik de manier van filteren korter opgeschreven
+  * Er voor gezorgt dat alle regels niet heel veel langer zijn dan 80 regels
+  

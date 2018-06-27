@@ -8,29 +8,32 @@
  * https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518
  * http://d3-legend.susielu.com/
 **/
-var slider1;
 
+// initialiseer een slider voor zowel de slider als de reset knop
+var sliderJaren;
+
+// functie die de kaart maakt
 function kaart(reizigerskilometers, vervoerswijze, jaar) {
 
   // creëer een infoKnop
-  var infoKnop = d3.select("#kaartContainer").append("g")
+  var infoKnopKaart = d3.select("#kaartContainer").append("g")
                    .attr("class", "tooltipje");
 
-  var infoKnop3 = d3.select("#kaartContainer").append("g")
+  var infoKnopSelectie = d3.select("#kaartContainer").append("g")
                     .attr("class", "tooltipje3");
 
-  dataReizigers = [];
-  for (var i = 0; i < reizigerskilometers.length; i++) {
-    if (reizigerskilometers[i].Periode == jaar && reizigerskilometers[i].Vervoerswijze == "Totaal") {
-      dataReizigers.push(reizigerskilometers[i]);
-    };
-  };
+  // filter voor de juiste data
+  dataReizigers = reizigerskilometers.filter(function(d,i) {
+    return (d.Periode == jaar && d.Vervoerswijze == "Totaal");
+  });
 
   var kleur = d3.scaleLinear()
                 .domain([3,38])
                 .range(["rgb(198,219,239)", "rgb(8,81,156)"]);
 
-  var svg = d3.selectAll("#Zeeland, #Noord-Holland, #Zuid-Holland, #Flevoland, #Utrecht, #Noord-Brabant, #Friesland, #Groningen, #Drenthe, #Overijssel, #Gelderland, #Limburg")
+  var svg = d3.selectAll("#Zeeland, #Noord-Holland, #Zuid-Holland, #Flevoland, #Utrecht, \
+                         #Noord-Brabant, #Friesland, #Groningen, #Drenthe, #Overijssel, \
+                         #Gelderland, #Limburg")
               .attr("class", "kaart")
               .data(dataReizigers)
               .style("fill", function(d) {
@@ -38,24 +41,24 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
 
               // maak de staven interactief
               .on("mouseover", function() {
-                infoKnop.style("display", null);
+                infoKnopKaart.style("display", null);
                 d3.select(this).style("stroke-width", 1.5);})
-
               .on("mouseout", function() {
-                infoKnop.style("display", null);
+                infoKnopKaart.style("display", null);
                 d3.select(this).style("stroke-width", 1)
                 d3.select(this).style("fill", function(d) {
                   return kleur(d.Afstand);});})
               .on("mousemove", function(d) {
-                infoKnop.html("Er in " + d.Provincie + "<br/>zijn er " + d.Afstand + "<br/> reizigerskilometers <br/>");})
+                infoKnopKaart.html("Er in " + d.Provincie + "<br/>zijn er " + d.Afstand + "<br/> reizigerskilometers <br/>");})
               .on("click", function(d) {
-                provincie = d.Provincie
+                provincie = d.Provincie;
                 d3.select(".tooltipje3").html("Selectie: " + provincie);
                 updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar);
                 update(vervoerswijze, provincie, "Totaal", jaar);})
 
-}
+};
 
+// maak een legenda aan voor de kaart
 function legenda() {
   var schaal = d3.scaleLinear()
                  .domain([3,38])
@@ -75,7 +78,7 @@ function legenda() {
                   .scale(schaal);
 
   g.call(legenda);
-}
+};
 
 function slider(reizigerskilometers, vervoerswijze) {
   // marges vast leggen
@@ -87,7 +90,7 @@ function slider(reizigerskilometers, vervoerswijze) {
               .attr("width", grafiekBreedte + marge.links + marge.rechts)
               .attr("height", grafiekHoogte + marge.boven + marge.beneden);
 
-  slider1 = d3.sliderHorizontal()
+  sliderJaren = d3.sliderHorizontal()
                  .min(2010)
                  .max(2014)
                  .step(1)
@@ -99,8 +102,7 @@ function slider(reizigerskilometers, vervoerswijze) {
                    d3.select(".tooltipje3").html("Selectie: " + provincie);
                    kaart(reizigerskilometers, vervoerswijze, val);
                    updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, val);
-                   update(vervoerswijze, provincie, "Totaal", val);
-                   })
+                   update(vervoerswijze, provincie, "Totaal", val);})
 
    var g = d3.select("#sliderContainer")
              .append("svg")
@@ -110,21 +112,29 @@ function slider(reizigerskilometers, vervoerswijze) {
              .append("g")
              .attr("transform", "translate(30,30)");
 
-   g.call(slider1);
-}
+   g.call(sliderJaren);
+};
 
+// funcie die alle waarden terug zet naar 2010 en Nederland
 function reset(reizigerskilometers, vervoerswijze) {
+
+  // zet alle waarden terug
   provincie = "Nederland";
   middel = "Totaal";
   jaar = "2010";
 
+  // verwijder alle tooltips
   d3.select(".tooltipje").remove();
   d3.select(".tooltipje3").remove();
-  slider1.value(2010);
 
+  // zet de slider terug naar 2010
+  sliderJaren.value(2010);
+
+  // zet alle vinkjes in checkbox weer aan
   d3.selectAll(".myCheckbox")
     .property("checked", true)
 
+  // roep alle visualisatie aan voor de nieuwe waarden
   kaart(reizigerskilometers, vervoerswijze, jaar);
   updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar);
   update(vervoerswijze, provincie, middel, jaar);

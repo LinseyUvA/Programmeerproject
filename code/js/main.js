@@ -2,18 +2,21 @@
  * Naam: Linsey Schaap
  * Studentnummer: 11036109
  *
- * Dit script haalt de gegevens op van het aantal overnachtingen dat plaats vindt in Nederland.
- * Hierbij wordt onderscheid gemaakt tussen verschillende landen en het soort hotel waar deze gasten in verblijven.
+ * Dit script haalt de gegevens op van het aantal reizigerskilometers en de vervoerswijze.
+ * Hierbij wordt onderscheid gemaakt tussen verschillende provincies en jaren.
  *
 **/
 
 // stel hoogte en breedte vast
 var hoogte = 300;
 var breedte = 500;
+
+// zet provincie vast
 var provincie = "Nederland";
 
 window.onload = function() {
 
+  // laad alle bestanden in
   d3.queue()
     .defer(d3.json, "data/reizigerskilometers.json")
     .defer(d3.json, "data/vervoerswijze.json")
@@ -27,13 +30,15 @@ window.onload = function() {
     var reizigerskilometers = response["0"]["data"];
     var vervoerswijze = response["1"]["data"];
 
+    // roep de knop en de kaart aan
     document.getElementById("kaartContainer").appendChild(response[2].documentElement);
     document.getElementById("knop").onclick = function() {reset(reizigerskilometers, vervoerswijze)};
 
+    // roep alle visualisatie aan
     slider(reizigerskilometers, vervoerswijze);
     legenda();
     kaart(reizigerskilometers, vervoerswijze, "2010");
-    ringdiagram(reizigerskilometers, vervoerswijze, "Nederland", "2010");
-    scatterplot(vervoerswijze, "Nederland", "Totaal", "2010");
+    ringdiagram(reizigerskilometers, vervoerswijze, provincie, "2010");
+    scatterplot(vervoerswijze, provincie, "Totaal", "2010");
   };
 };
