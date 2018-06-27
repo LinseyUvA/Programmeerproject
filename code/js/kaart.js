@@ -15,10 +15,11 @@ var sliderJaren;
 // functie die de kaart maakt
 function kaart(reizigerskilometers, vervoerswijze, jaar) {
 
-  // creëer een infoKnop
+  // creëer een infoKnop voor extra info over de provincie
   var infoKnopKaart = d3.select("#kaartContainer").append("g")
                    .attr("class", "tooltipje");
 
+  // creëer een infoKnop om aan te geven waar op wordt geselecteerd
   var infoKnopSelectie = d3.select("#kaartContainer").append("g")
                     .attr("class", "tooltipje3");
 
@@ -49,7 +50,8 @@ function kaart(reizigerskilometers, vervoerswijze, jaar) {
                 d3.select(this).style("fill", function(d) {
                   return kleur(d.Afstand);});})
               .on("mousemove", function(d) {
-                infoKnopKaart.html("Er in " + d.Provincie + "<br/>zijn er " + d.Afstand + "<br/> reizigerskilometers <br/>");})
+                infoKnopKaart.html("Er worden in " + d.Provincie + "<br/> " + d.Afstand +
+                                   " miljard <br/> reizigerskilometers afgelegd<br/>");})
               .on("click", function(d) {
                 provincie = d.Provincie;
                 d3.select(".tooltipje3").html("Selectie: " + provincie);
@@ -80,12 +82,15 @@ function legenda() {
   g.call(legenda);
 };
 
+// functie voor het aanmaken van een slider voor de jaren 2010 t/m 2014
 function slider(reizigerskilometers, vervoerswijze) {
+
   // marges vast leggen
   var marge = {boven: 50, beneden: 20, rechts: 60, links: 160};
   var grafiekHoogte = hoogte - marge.boven - marge.beneden;
   var grafiekBreedte = breedte - marge.rechts - marge.links;
 
+  // maak een SVG element
   var svg = d3.select("#sliderContaine")
               .attr("width", grafiekBreedte + marge.links + marge.rechts)
               .attr("height", grafiekHoogte + marge.boven + marge.beneden);
@@ -106,7 +111,6 @@ function slider(reizigerskilometers, vervoerswijze) {
 
    var g = d3.select("#sliderContainer")
              .append("svg")
-             .attr("id", "timTest")
              .attr("width", 600)
              .attr("height", 65)
              .append("g")

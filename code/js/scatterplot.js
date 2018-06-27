@@ -124,8 +124,8 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
        infoKnopScatter.attr("transform", "translate(" + xPos + "," + yPos + ")")
        infoKnopScatter.select("text").text(d.Verplaatsing);})
      .on("click", function(d) {
-       infoKnopScatterSelectie.html("<br/>Er wordt in " + d.Provincie + " op "
-                                    + d.Verplaatsing + " " + d.Afstand + " km afgelegd in "
+       infoKnopScatterSelectie.html("<br/>Er wordt op " + d.Verplaatsing +
+                                    " een afstand van " + d.Afstand + " km afgelegd in "
                                     + d.Reisduur + " minuten<br/>");});
 
    d3.selectAll(".myCheckbox")
@@ -153,6 +153,7 @@ function scatterplot(vervoerswijze, provincie, middel, jaar){
                   .attr("x", 15)
                   .attr("dy", "1.2em");
 
+   // creëer een infoKnop om aan te geven waar op wordt geselecteerd
    var infoKnopScatterSelectie = d3.select("#scatterplotContainer").append("g")
                                    .attr("class", "tooltipje2");
 }
@@ -168,8 +169,6 @@ function update(dataVervoerswijze, provincie, middel, jaar){
 
   data = ["maandag","dinsdag","woensdag","donderdag","vrijdag", "7 tot 9 uur",
           "9 tot 12 uur", "12 tot 16 uur", "16 tot 18 uur", "18 tot 24 uur"];
-
-  console.log(data)
 
   if(choices.length > 0){
     d3.selectAll(".myCheckbox").each(function(d) {
@@ -301,8 +300,8 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
         infoKnopScatter.attr("transform", "translate(" + xPos + "," + yPos + ")")
         infoKnopScatter.select("text").text(d.Verplaatsing);})
     .on("click", function(d) {
-      infoKnopScatterSelectie.html("<br/>Er wordt in " + d.Provincie + " op "
-                                   + d.Verplaatsing + " " + d.Afstand + " km afgelegd in "
+      infoKnopScatterSelectie.html("<br/>Er wordt op " + d.Verplaatsing +
+                                   " een afstand van " + d.Afstand + " km afgelegd in "
                                    + d.Reisduur + " minuten<br/>");});
 
   d3.selectAll(".myCheckbox")
@@ -327,6 +326,7 @@ function updateScatterplot(vervoerswijze, dataFilter, provincie, middel, jaar){
                  .attr("x", 15)
                  .attr("dy", "1.2em");
 
+  // creëer een infoKnop om aan te geven waar op wordt geselecteerd
   var infoKnopScatterSelectie = d3.select("#scatterplotContainer").append("g")
                                   .attr("class", "tooltipje2");
 

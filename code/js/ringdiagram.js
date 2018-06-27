@@ -77,7 +77,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
       .attr("class", "ondertitel")
       .text(provincie);
 
-  // creëer een infoKnop
+  // creëer een infoKnop voor extra info over onderdeel ring
   var infoKnopRing = svg.append("g")
                         .attr("class", "tooltipje")
                         .style("display", "none");
@@ -87,6 +87,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .attr("x", 40)
               .attr("dy", "1.2em");
 
+  // creëer een infoKnop om aan te geven waar op wordt geselecteerd
   var infoKnopSelectie = d3.select("#kaartContainer").append("g")
                            .attr("class", "tooltipje3");
 
@@ -94,7 +95,7 @@ function ringdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
   vervoer = ["Auto (bestuurder)", "Auto (passagier)", "Trein", "Bus/tram/metro",
              "Brom-/snorfiets", "Fiets", "Lopen"]
 
-  // maak legenda voor de kleuren
+  // maak legenda voor de ringdiagram
   var legenda = svg.append("g")
                    .attr("class", "legend")
 
@@ -144,9 +145,6 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
               .attr("width", breedte)
               .append("g")
               .attr("transform", "translate(" + grafiekBreedte + "," + (grafiekHoogte - straal/2) + ")");
-
-  var infoKnopSelectie = d3.select("#kaartContainer").append("g")
-                           .attr("class", "tooltipje3");
 
   // maak een kleurschema
   var kleur = d3.scaleOrdinal()
@@ -203,4 +201,8 @@ function updateRingdiagram(reizigerskilometers, vervoerswijze, provincie, jaar){
   infoKnopRing.append("text")
               .attr("x", 40)
               .attr("dy", "1.2em");
+
+  // creëer een infoKnop om aan te geven waar op wordt geselecteerd
+  var infoKnopSelectie = d3.select("#kaartContainer").append("g")
+                           .attr("class", "tooltipje3");
 }
