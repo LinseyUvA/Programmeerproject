@@ -29,4 +29,15 @@ Het grootste verschil met mijn design document is dat de interactieve delen meer
 Vooral de checkbox die ervoor zorgde dat alle updates van de scatterplot eerst langs de functie *checkbox* moesten om ervoor te zorgen dat de juiste data werd gepresenteerd.
 
 ## Gemaakte beslissingen
-Waarom zijn deze veranderingen doorgevoerd? Welke afwegingen moest ik maken? Wat zou er beter kunnen als ik meer tijd had.
+Aan het begin heb ik het implementeren van de interactieve onderdelen onderschat.
+Het bleek dat hier soms nog best grote functies voor moesten worden geschreven die nog best handig waren voor het updaten van bijvoorbeeld de scatterplot.
+Ik heb ervoor gekozen om mijn project in meerdere functies op te delen dat ik in eerste instantie had bedacht.
+Deze keuze zorgt ervoor dat mijn project leesbaarder is geworden. \
+Tijdens het programmeren moest ik een keuze maken tussen statische assen bij het klikken op een checkbox en meerdere functies of één functie die de scatterplot update.
+Ik ben voor de laatste optie gegaan en heb ervoor gekozen dat de gebruiker de laatste twee datapunten niet kan uitzetten.
+Hierdoor hebben de assen nog steeds een enigszins normale verdeling. \
+Als er meer tijd zou zijn zou ik graag nog een extra checkbox bij de scatterplot willen vroegen waar je meerdere provincies tegelijkertijd kan weergeven.
+Op deze manier kan je niet alleen dagen en tijdstippen met elkaar vergelijken maar ook de provincies.
+Een ander element dat ik zou willen toevoegen is een knop voor Nederland.
+Deze knop zet alle waarden dan alleen terug naar Nederland.
+Dus niet zoals de reset knop doet ook nog het jaar naar 2010, alle vinkjes bij de checkbox aan en alle vervoerswijze (Totaal).
