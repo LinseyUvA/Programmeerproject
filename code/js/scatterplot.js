@@ -4,6 +4,8 @@
  *
  * Dit script...
  *
+ * Bronnen:
+ * https://bl.ocks.org/johnnygizmo/531991a77047112b7ca89f78b840fba5
 **/
 
 // functie die de scatterplot maakt
