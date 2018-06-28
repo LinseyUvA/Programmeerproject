@@ -10,7 +10,7 @@ De checkbox is onderdeel van de scatterplot.
 Door boxen uit te zetten verdwijnen de desbetreffende datapunten in de scatterplot.
 
 ## Technisch design
-![](doc/designDiagram.PNG)
+![](doc/designDiagram.PNG) \
 De kaart heeft een hover functie waarbij het aantal kilometers zichtbaar wordt voor de desbetreffende provincie.
 Door te klikken op de kaart worden de ringdiagram en scatterplot geupdatet.
 De ringdiagram heeft ook zowel een hover functie als klikfunctie.
@@ -21,8 +21,12 @@ Over alle visualisaties zit een slider die alle drie update.
 De reset knop zet voor alle visualisatie de waarden weer terug naar 2010, Nederland en Totaal.
 
 ## Uitdagingen
-
-Problemen tijdens het programmeren en de grooste verschillen met design.md
+Tijdens het programmeren vond ik het lastig om de tooltips op de juiste plekken te krijgen.
+Soms werd er niets getoond of kwamen ze achter de visualisaties terecht.
+Een ander obstakel was om transitie toe te voegen aan de scatterplot, omdat alle datapunten verdwenen wanneer ik het probeerde toe te passen.
+De checkbox leverde ook wat problemen op, want het meegeven van de juiste informatie en dat weer doorgeven aan de volgende functie was niet heel intuïtief. Ook een muis functie hier aan toevoegen was lastig, maar met behulp van de assistenten kwamen we er gelukkig wel uit. \
+Het grootste verschil met mijn design document is dat de interactieve delen meer tijd en opslag nodig hadden.
+Vooral de checkbox die ervoor zorgde dat alle updates van de scatterplot eerst langs de functie *checkbox* moesten om ervoor te zorgen dat de juiste data werd gepresenteerd.
 
 ## Gemaakte beslissingen
 Waarom zijn deze veranderingen doorgevoerd? Welke afwegingen moest ik maken? Wat zou er beter kunnen als ik meer tijd had.
