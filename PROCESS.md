@@ -127,3 +127,8 @@ Linsey Schaap (11036109)
   * overal commentaar toegevoegd
 * md
   * Review gedaan samen met Nadja
+
+### Donderdag
+* md
+  * Alle tips van Nadja toegepast
+  

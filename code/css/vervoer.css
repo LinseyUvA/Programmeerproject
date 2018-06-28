@@ -1,4 +1,4 @@
-.tooltipje{
+.tooltipje {
   font-size: 12px;
   font-weight: bold;
   position: absolute;
@@ -8,7 +8,7 @@
   left: 45%;
 }
 
-.tooltipje2{
+.tooltipje2 {
   font-size: 12px;
   font-weight: bold;
   position: relative;
@@ -23,7 +23,7 @@
   font-size: 10px;
 }
 
-.titelAs{
+.titelAs {
   fill: Gray;
   text-anchor: middle;
 }
@@ -32,19 +32,32 @@
   text-anchor: middle;
 }
 
-.myCheckbox{
+.myCheckbox {
   font-size: 32px;
 }
 
-p{
+p {
   font-size: 18px;
 }
 
-ul{
+ul {
   font-size: 18px;
   list-style-type: circle;
 }
 
-#section1 {padding-top:50px;height:1032px;background-color: LightGray;}
-#section2 {padding-top:50px;height:800px}
-#section3 {padding-top:50px;height:585px;background-color: LightGray;}
+#section1 {
+  padding-top: 50px;
+  height: 1032px;
+  background-color: LightGray;
+}
+
+#section2 {
+  padding-top: 50px;
+  height: 800px
+}
+
+#section3 {
+  padding-top: 50px;
+  height: 585px;
+  background-color: LightGray;
+}

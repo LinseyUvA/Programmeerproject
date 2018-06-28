@@ -1,6 +1,9 @@
 # Report
 
-1 enkele screenshot en een korte uitleg
+![](doc/screenshot.PNG)
+
+![](doc/designDiagram.PNG)
+De visualisaties bestaan uit een kaart waar
 
 Uitleg functionaliteit:
 Mijn site bestaat uit een kaart, een ringdiagram en een scatterplot.

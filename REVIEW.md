@@ -25,7 +25,7 @@ mist een ; bij (r. 46, 247, 250) \
 stel een *ander* kleur vast (r. 86) \
 plus hoort bij de volgende regel (r. 129, 322) \
 spatie bij + (r. 139, 304) \
-converteer data ipv leees data (r. 229)
+converteer data ipv lees data (r. 229)
 
 #### css
 naam css file aanpassen \
