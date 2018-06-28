@@ -1,6 +1,6 @@
 # Report
 
-![](doc/screenshot.png)
+![](doc/screenshot.jpg)
 
 
 ![](doc/designDiagram.PNG)
