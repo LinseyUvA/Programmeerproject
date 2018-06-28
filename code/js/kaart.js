@@ -2,7 +2,7 @@
  * Naam: Linsey Schaap
  * Studentnummer: 11036109
  *
- * Dit script...
+ * Dit script tekent de kaart en bijhorende legenda en bevat de slider en de reset knop.
  *
  * Bronnen:
  * https://bl.ocks.org/johnwalley/e1d256b81e51da68f7feb632a53c3518

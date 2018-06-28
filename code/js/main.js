@@ -4,6 +4,7 @@
  *
  * Dit script haalt de gegevens op van het aantal reizigerskilometers en de vervoerswijze.
  * Hierbij wordt onderscheid gemaakt tussen verschillende provincies en jaren.
+ * Vervolgens worden alle visualisaties opgeroepen.
  *
 **/
 

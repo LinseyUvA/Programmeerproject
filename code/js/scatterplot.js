@@ -2,7 +2,8 @@
  * Naam: Linsey Schaap
  * Studentnummer: 11036109
  *
- * Dit script...
+ * Dit script tekent de scatterplot waarin het aantal kilometers worden uitgezet tegen het aantal minuten.
+ * Veranderingen in de checkbox worden ook in dit script bijgehouden.
  *
  * Bronnen:
  * https://bl.ocks.org/johnnygizmo/531991a77047112b7ca89f78b840fba5

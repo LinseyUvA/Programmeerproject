@@ -131,4 +131,8 @@ Linsey Schaap (11036109)
 ### Donderdag
 * md
   * Alle tips van Nadja toegepast
-  
+  * report geschreven
+  * readme aangepast zoals van ons wordt verwacht
+* Site
+  * tekst bovenaan de pagina herschreven
+  * tekst bij de bronnen geschreven

@@ -2,7 +2,7 @@
  * Naam: Linsey Schaap
  * Studentnummer: 11036109
  *
- * Dit script...
+ * Dit script tekent de ringdiagram waarin de verdeling van de verschillende vervoerswijze is te zien.
  *
  * Bronnen:
  * https://bl.ocks.org/mbostock/3887193
