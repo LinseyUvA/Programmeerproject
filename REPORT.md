@@ -1,6 +1,7 @@
 # Report
 
-![](doc/screenshot.PNG)
+![](doc/screenshot.png)
+
 
 ![](doc/designDiagram.PNG)
 De visualisaties bestaan uit een kaart waar
