@@ -33,7 +33,8 @@ Aan het begin heb ik het implementeren van de interactieve onderdelen onderschat
 Het bleek dat hier soms nog best grote functies voor moesten worden geschreven die nog best handig waren voor het updaten van bijvoorbeeld de scatterplot.
 Ik heb ervoor gekozen om mijn project in meerdere functies op te delen dat ik in eerste instantie had bedacht.
 Deze keuze zorgt ervoor dat mijn project leesbaarder is geworden. \
-Tijdens het programmeren moest ik een keuze maken tussen statische assen bij het klikken op een checkbox en meerdere functies of één functie die de scatterplot update.
+Tijdens het programmeren moest ik een keuze maken tussen statische assen bij het klikken op een checkbox en meerdere functies of één functie die de scatterplot update, maar dan zouden de assen altijd meebewegen met een verandering in de datapunten.
+Dit zou kunnen betekenen dat op het moment dat er maar één vinkje in de checkbox aan staat er één datapunt in de oorsprong terecht komt.
 Ik ben voor de laatste optie gegaan en heb ervoor gekozen dat de gebruiker de laatste twee datapunten niet kan uitzetten.
 Hierdoor hebben de assen nog steeds een enigszins normale verdeling. \
 Als er meer tijd zou zijn zou ik graag nog een extra checkbox bij de scatterplot willen vroegen waar je meerdere provincies tegelijkertijd kan weergeven.
